@@ -1,0 +1,26 @@
+<footer class="ngcontent-yto-c137">
+    <div class="footer-lef" [innerHTML]="data" *ngIf="data!=null">
+    </div>
+    <div class="footer-info">
+      <ul class="footer-info-nav row" *ngIf="menus.length>0">
+        <li class="col-md-6 cl-padding-lr" *ngFor="let item of menus">
+          <a class="nav-link cl-padding-lr" [routerLink]="item.menuUrl" (click)="scroll_first()" routerLinkActive="active"
+            [innerHTML]="item.menuName"></a>
+        </li>
+      </ul>
+      <div class="footer-info-icon row">
+        <span class="cl-padding-lr">{{lang.parseTextCommon("connect_with_us")}}</span>
+        <ul>
+          <li (click)="shareLink(0)"><i class="fa-brands fa-facebook"
+              style="color: linear-gradient(180deg, #18ACFE 0%, #0163E0 99.7%);"></i></li>
+          <li (click)="shareLink(1)"><i class="fa-brands fa-twitter" style="color: #47ACDF;"></i></li>
+          <li (click)="shareLink(2)"><i class="fa-brands fa-linkedin" style="color: rgba(18, 117, 177, 1);"></i></li>
+          <!-- <li (click)="shareLink(2)"><i class="fa-brands fa-instagram-square instagram"></i></li> -->
+          <!-- <li (click)="shareLink(3)"><i class="fa-brands fa-instagram-square"></i></li> -->
+        </ul>
+      </div>
+    </div>
+    <div class="row ">
+      <p style="text-align: center; margin-top: 50px;">© Copyright 2023 Bản quyền thuộc về Công ty cổ phần Giải pháp và Dịch vụ Công nghệ số Việt Nam</p>
+    </div>
+</footer>

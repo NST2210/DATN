@@ -1,0 +1,50 @@
+<app-loading [loading]="loading"></app-loading>
+<div class="modal-header">
+    <h4 class="modal-title pull-left" [innerHTML]="title"></h4>
+</div>
+<div class="modal-body">
+    <form [formGroup]="rejectForm" novalidate>
+        <c-row class="margin-t15">
+            <c-col md="12" xl="12" xs="12">
+                <mat-radio-group formControlName="actionType">
+                    <mat-radio-button class="margin-r15" value="1"
+                    >Duyệt
+                    </mat-radio-button
+                    >
+                    <mat-radio-button value="2">Từ chối</mat-radio-button>
+                </mat-radio-group>
+            </c-col>
+        </c-row>
+        <c-row class="margin-t15" *ngIf="isReject">
+            <c-col md="12" xl="12" xs="12">
+                <mat-form-field class="full-width">
+                    <mat-label>Lý do từ chối</mat-label>
+                    <textarea
+                        formControlName="rejectContent"
+                        type="text"
+                        trim="blur"
+                        matInput
+                        rows="5"
+                        placeholder="Lý do từ chối"
+                    >
+                    </textarea>
+                    <mat-error *ngIf="rejectForm.controls['rejectContent'].hasError('required')">
+                        Vui lòng nhập thông tin
+                    </mat-error>
+                    <mat-error *ngIf="rejectForm.controls['rejectContent'].hasError('maxlength')">
+                        Lý do từ chối không được dài quá 2000 kí tự
+                    </mat-error>
+                </mat-form-field>
+            </c-col>
+        </c-row>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="margin-r15" color="info" cButton (click)="doConfirm()">
+        <svg cIcon name="cilCheckAlt"></svg>&nbsp;Xác nhận
+    </button>
+    <button color="danger" cButton (click)="doClose()">
+        <svg cIcon name="cilX"></svg>
+        Đóng
+    </button>
+</div>

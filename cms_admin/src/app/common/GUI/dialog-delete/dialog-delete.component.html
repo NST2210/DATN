@@ -1,0 +1,14 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left" [innerHTML]="title"></h4>
+</div>
+<div class="modal-body">
+    <label [innerHTML]="message"></label>
+</div>
+<div class="modal-footer">
+    <button style="margin-right: 10px;" color="info" cButton (click)="doConfirm()">
+        <svg cIcon name="cilCheckAlt"></svg>&nbsp;Xóa
+    </button>
+    <button color="danger" cButton (click)="close()">
+        <svg cIcon name="cilX"></svg>&nbsp;Đóng
+    </button>
+</div>

@@ -1,0 +1,68 @@
+<app-loading [loading]="loading"></app-loading>
+<div class="modal-header">
+    <h4 class="modal-title pull-left" [innerHTML]="title"></h4>
+</div>
+<div class="modal-body">
+    <c-row>
+        <c-col md="4" xl="4" xs="12">
+            <mat-form-field>
+                <mat-label>Tên đăng nhập</mat-label>
+                <input trim="blur" matInput (keyup)="filterUser($event)" placeholder="Tên đăng nhập" #input>
+            </mat-form-field>
+        </c-col>
+    </c-row>
+
+    <table mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="no">
+            <th
+                style="width: 5%"
+                class="text-center"
+                mat-header-cell
+                *matHeaderCellDef
+            >
+                STT
+            </th>
+            <td
+                class="text-center"
+                mat-cell
+                *matCellDef="let item; let i = index"
+            >
+                {{ page * pageSize + (i + 1) }}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="userName" class="text-center">
+            <th class="text-center" mat-header-cell *matHeaderCellDef> Tên đăng nhập</th>
+            <td class="text-center" mat-cell *matCellDef="let element"> {{element.userName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="radioButton" class="text-center">
+            <th class="text-center" mat-header-cell *matHeaderCellDef></th>
+            <td class="text-center" mat-cell *matCellDef="let row">
+                <mat-radio-group [(ngModel)]="selectedRow">
+                    <mat-radio-button [value]="row"></mat-radio-button>
+                </mat-radio-group>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">Không có dữ liệu với tên đăng nhập "{{input.value}}"</td>
+        </tr>
+    </table>
+
+    <mat-paginator [length]="totalItem" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 15, 20]"
+                   (page)="getAllUserByRole($event)">
+    </mat-paginator>
+</div>
+<div class="modal-footer">
+    <button color="warning" cButton (click)="doSwitchApprove()">
+        <svg cIcon name="cilPeople"></svg>
+        Chuyển người duyệt
+    </button>
+    <button class="margin-l10" color="danger" cButton (click)="doClose()">
+        <svg cIcon name="cilX"></svg>
+        Đóng
+    </button>
+</div>

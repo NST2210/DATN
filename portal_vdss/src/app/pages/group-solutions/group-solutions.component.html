@@ -1,0 +1,61 @@
+<div class="solution-sumary">
+  <div class="solution-sumary-title">
+    <span class="solution-sumary-title-lb">{{groupName}}</span>
+  </div>
+  <div class="menu-detail-body">
+    <!--Menu chuyên đề giải pháp -->
+    <div class="menu-header">
+      <div class="titlebar clearfix">
+        <h1>
+          <a class="text-link c-p" (click)="doBackHome()">{{menuName }}</a>
+        </h1>
+        <ul class="menu-detail-nav c-p">
+          <ng-container *ngIf="menuInfo && menuInfo.child">
+            <li *ngFor="let item of menuInfo.child">
+              <a [ngClass]="
+                item.active === true ? 'text-link menu-active' : 'text-link'
+              " (click)="doChangeGroup(item)" data-toggle="tooltip"
+              title="{{item.menuName}}">{{ item.menuName }}</a>
+            </li>
+          </ng-container>
+        </ul>
+      </div>
+    </div>
+    <!-- Bài viết mới nhất -->
+    <div class="row">
+      <div class="col-12">
+        <div class="group-content" *ngIf="dataFirst">
+          <div class="group-content-top">
+            <a class="text-link" (click)="doDetail(dataFirst)">
+              <img *ngIf="dataFirst.artImgDisplay" src="{{ 'data:image/jpg;base64,' + dataFirst.artImgDisplay }}" />
+              <img *ngIf="!dataFirst.artImgDisplay" src="../../../assets/home/logo.png" alt="Hehe">
+            </a>
+            <div class="group-content-top-desc">
+              <h1 class="text-link" (click)="doDetail(dataFirst)" [innerHTML]="helper.convertText(dataFirst.artTitle)">
+              </h1>
+              <p class="text-description">{{ dataFirst.artDesc }}</p>
+            </div>
+          </div>
+        </div>
+        <!-- 3 bài viết mới nhất -->
+        <div class="group-list" *ngFor="let item of dataList, let i = index">
+          <a class="text-link" (click)="doDetailNew(item)">
+            <img *ngIf="item.imgDisplay" src="{{ 'data:image/jpg;base64,' + item.imgDisplay }}" />
+            <img *ngIf="!item.imgDisplay" src="../../../assets/home/logo.png" alt="Hihe">
+          </a>
+          <div class="group-content-top-desc">
+            <h1 class="text-link" (click)="doDetailNew(item)" [innerHTML]="helper.convertText(item.title)"></h1>
+            <p class="text-description">{{ item.describe }}</p>
+          </div>
+        </div>
+        <!-- Phân trang -->
+        <div class="row">
+          <mat-paginator #paginator class="demo-paginator" (page)="handlePageEvent($event)" [length]="length"
+            [pageSize]="pageSize" [disabled]="false" [showFirstLastButtons]="true" [hidePageSize]="true"
+            [pageIndex]="pageIndex" aria-label="Select page">
+          </mat-paginator>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

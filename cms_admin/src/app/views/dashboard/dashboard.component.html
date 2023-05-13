@@ -1,0 +1,201 @@
+<app-loading [loading]="loading"></app-loading>
+<div class="animated fadeIn" style="margin-bottom: 20px">
+    <mat-card>
+        <mat-card-header class="card-header-custom">
+            <mat-card-title>Thông tin</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <c-row>
+                <c-col md="4" xl="4" xs="12">
+                    <mat-form-field class="full-width">
+                        <mat-label>Portal</mat-label>
+                        <mat-select [(ngModel)]="portalCode" (ngModelChange)="onChangePortal($event)">
+                            <mat-option *ngFor="let obj of lstPortal" [value]="obj.code">
+                                {{ obj.description }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </c-col>
+                <c-col md="4" xl="4" xs="12">
+                    <mat-form-field class="full-width">
+                        <mat-label>Ngôn ngữ</mat-label>
+                        <!-- <mat-select [(ngModel)]="langCode" (ngModelChange)="onChangeLang()">
+                            <mat-option [value]=""> ---Tất cả--- </mat-option>
+                            <mat-option *ngFor="let obj of lstLangByPortal" [value]="obj.langCode">-->
+                        <mat-select [(ngModel)]="langCode" (ngModelChange)="onChangeLang()">
+                            <mat-option *ngFor="let obj of lstLangByPortal" [value]="obj.langCode">
+                                {{ obj.langName }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </c-col>
+                <c-col md="4" xl="4" xs="12">
+                    <mat-form-field class="full-width">
+                        <mat-label>Thời gian</mat-label>
+                        <mat-date-range-input [rangePicker]="campaignOnePicker">
+                            <input matStartDate placeholder="Từ ngày" [(ngModel)]="fromDate"
+                                (dateChange)="onChangeFromDate(fromDate)" dateTransform />
+                            <!-- dateTransform [format]="DATE_CONSTANT.DDMMYYYY_SLASH_SMALL"> -->
+                            <input matEndDate placeholder="Đến ngày" [(ngModel)]="toDate"
+                                (dateChange)="onChangeToDate(toDate)" dateTransform />
+                            <!-- dateTransform [format]="DATE_CONSTANT.DDMMYYYY_SLASH_SMALL"> -->
+                            <!-- <input
+                                matStartDate
+                                placeholder="Từ ngày"
+                                [(ngModel)]="fromDate"
+                                (dateChange)="onChangeFromDate(fromDate)"
+                                dateTransform
+                            />
+                            <input
+                                matEndDate
+                                placeholder="Đến ngày"
+                                [(ngModel)]="toDate"
+                                (dateChange)="onChangeToDate(toDate)"
+                            /> -->
+                        </mat-date-range-input>
+                        <mat-datepicker-toggle matIconSuffix [for]="campaignOnePicker"></mat-datepicker-toggle>
+                        <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
+                    </mat-form-field>
+                </c-col>
+            </c-row>
+        </mat-card-content>
+    </mat-card>
+
+    <div class="dasboard-number">
+        <div class="card card-item">
+            <div class="card-body">
+                <div class="d-flex no-block">
+                    <div class="round align-self-center round-success">
+                        <i class="d-icon fa fa-ravelry" aria-hidden="true"></i>
+                    </div>
+                    <div class="margin-l10 align-self-center">
+                        <h3 class="margin-bt0">
+                            <strong>{{
+                                formatViewNumber(
+                                dashboardTotal.articleGroup
+                                )
+                                }}</strong>
+                        </h3>
+                        <h5 class="text-muted margin-bt0">
+                            Chuyên đề bài viết
+                        </h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card card-item card-item-marrgin">
+            <div class="card-body">
+                <div class="d-flex no-block">
+                    <div class="round align-self-center round-info">
+                        <i class="d-icon fa fa-file-word-o" aria-hidden="true"></i>
+                    </div>
+                    <div class="margin-l10 align-self-center">
+                        <h3 class="margin-bt0">
+                            <strong>{{
+                                formatViewNumber(dashboardTotal.article)
+                                }}</strong>
+                        </h3>
+                        <h5 class="text-muted margin-bt0">Bài viết</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card card-item">
+            <div class="card-body">
+                <div class="d-flex no-block">
+                    <div class="round align-self-center round-danger">
+                        <i class="d-icon fa fa-globe" aria-hidden="true"></i>
+                    </div>
+                    <div class="margin-l10 align-self-center">
+                        <h3 class="margin-bt0">
+                            <strong>{{
+                                formatViewNumber(dashboardTotal.viewer)
+                                }}</strong>
+                        </h3>
+                        <h5 class="text-muted margin-bt0">
+                            Lượng truy cập
+                        </h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card card-item card-item-marrgin">
+            <div class="card-body">
+                <div class="d-flex no-block">
+                    <div class="round align-self-center round-danger">
+                        <i class="d-icon fa fa-users" aria-hidden="true"></i>
+                    </div>
+                    <div class="margin-l10 align-self-center">
+                        <h3 class="margin-bt0">
+                            <strong>{{
+                                formatViewNumber(dashboardTotal.feedback)
+                                }}</strong>
+                        </h3>
+                        <h5 class="text-muted margin-bt0">
+                            Lượng ứng tuyển
+                        </h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card card-item">
+            <div class="card-body">
+                <div class="d-flex no-block">
+                    <div class="round align-self-center round-danger">
+                        <i class="d-icon fa fa-users" aria-hidden="true"></i>
+                    </div>
+                    <div class="margin-l10 align-self-center">
+                        <h3 class="margin-bt0">
+                            <strong>{{
+                                formatViewNumber(dashboardTotal.recruitment)
+                                }}</strong>
+                        </h3>
+                        <h5 class="text-muted margin-bt0">
+                            Lượng liên hệ
+                        </h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <c-row class="margin-t15">
+        <c-col md="7" xl="7" xs="12">
+            <mat-card>
+                <mat-card-content>
+                    <h3>Thống kê bài viết</h3>
+                    <!-- <div class="row">
+                        <div class="col-md-12">
+                            <canvas baseChart class="chart" [data]="barChartData" [options]="barChartOptions"
+                                [type]="barChartType" [height]="400"> -->
+                    <div class="chartWrapper">
+                        <div class="chartAreaWrapper">
+                            <!-- <canvas baseChart class="chart" [data]="barChartData" [options]="barChartOptions"
+                                [height]="385"> -->
+                            <canvas id="myChart"
+                                baseChart
+                                class="chart"
+                                [data]="barChartData"
+                                [options]="barChartOptions"
+                                [height]="385"
+                            >
+                            </canvas>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </c-col>
+        <c-col md="5" xl="5" xs="12">
+            <mat-card>
+                <mat-card-content>
+                    <h3>Trạng thái bài viết</h3>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <pie-char [pieCharData]="pieCharData"></pie-char>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </c-col>
+    </c-row>
+</div>

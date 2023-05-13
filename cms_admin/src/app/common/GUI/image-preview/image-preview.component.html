@@ -1,0 +1,27 @@
+<app-loading [loading]="loading"></app-loading>
+<div class="modal-header">
+    <h4 class="modal-title pull-left" [innerHTML]="imgName"></h4>
+</div>
+<div class="modal-body text-center">
+    <div *ngIf="dataInput && dataInput.fileContent">
+        <img class="img-thumbnail" src="{{ 'data:image/png;base64,' + dataInput.fileContent }}" />
+    </div>
+    <!-- <div *ngIf="dataInput && dataInput.imgData && dataInput.displayVideo==='video/mp4'">
+        <video (click)="toggleVideo()" #videoPlayer controls>
+            <source src="{{'data:video/mp4;base64,' + (dataInput.imgData) }}" type="video/mp4">
+        </video>
+    </div>-->
+    <div *ngIf="dataInput && dataInput.description" class="margin-t15">
+        <span>
+            <strong>Mô tả ảnh: </strong>
+            {{ dataInput.description }}
+        </span>
+    </div>
+
+</div>
+<div class="modal-footer">
+    <button color="danger" cButton (click)="doClose()">
+        <svg cIcon name="cilX"></svg>
+        Đóng
+    </button>
+</div>

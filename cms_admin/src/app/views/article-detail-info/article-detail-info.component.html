@@ -1,0 +1,121 @@
+<app-loading [loading]="loading"></app-loading>
+<div class="animated fadeIn">
+    <mat-card>
+        <mat-card-header class="card-header-custom">
+            <mat-card-title>Thông tin tìm kiếm</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <c-row>
+                <c-col md="4" xl="4" xs="12">
+                    <mat-form-field class="full-width">
+                        <mat-label>Portal</mat-label>
+                        <mat-select [(ngModel)]="portalCode" (ngModelChange)="onChangePortal($event)">
+                            <mat-option *ngFor="let obj of lstPortal" [value]="obj.code">
+                                {{ obj.description }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </c-col>
+                <c-col md="4" xl="4" xs="12">
+                    <mat-form-field class="full-width">
+                        <mat-label>Ngôn ngữ</mat-label>
+                        <mat-select [(ngModel)]="langCode" (ngModelChange)="onChangeLang($event)">
+                            <mat-option [value]="null">
+                                ---Tất cả---
+                            </mat-option>
+                            <mat-option *ngFor="let obj of lstLangByPortal" [value]="obj.langCode">
+                                {{ obj.langName }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </c-col>
+                <c-col md="4" xl="4" xs="12">
+                    <mat-form-field class="full-width">
+                        <mat-label>Chuyên mục bài viết</mat-label>
+                        <mat-select [(ngModel)]="menuCode" (ngModelChange)="onChangeGroupCode($event)">
+                            <mat-option [value]="null">
+                                ---Tất cả---
+                            </mat-option>
+                            <mat-option *ngFor="let obj of lstMenuCode" [value]="obj.menuCode">
+                                {{ obj.name }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </c-col>
+            </c-row>
+            <c-row>
+                <c-col md="4" xl="4" xs="12">
+                    <mat-form-field class="full-width">
+                        <mat-label>Chuyên đề bài viết</mat-label>
+                        <mat-select [(ngModel)]="groupCode" (ngModelChange)="onChangeSubGroupCode()">
+                            <mat-option *ngFor="let obj of lstArticleGroup" [value]="obj.groupCode">
+                                {{ obj.groupName }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </c-col>
+                <c-col md="4" xl="4" xs="12">
+                    <mat-form-field class="full-width">
+                        <mat-label>Trạng thái hoạt động</mat-label>
+                        <mat-select [(ngModel)]="activeStatus" (ngModelChange)="onChangeSearch()">
+                            <mat-option *ngFor="let obj of lstActiveStatus" [value]="obj.value">
+                                {{ obj.name }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </c-col>
+                <c-col md="4" xl="4" xs="12">
+                    <mat-form-field class="full-width">
+                        <mat-label>Trạng thái phê duyệt</mat-label>
+                        <mat-select [(ngModel)]="approveStatus" (ngModelChange)="onChangeSearch()">
+                            <mat-option *ngFor="let obj of lstApprovedStatus" [value]="obj.value">
+                                {{ obj.name }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </c-col>
+
+            </c-row>
+            <c-row *ngIf="searchAdvance">
+                <c-col md="4" xl="4" xs="12" *ngIf="searchAdvance">
+                    <mat-form-field class="full-width">
+                        <mat-label>Tác giả</mat-label>
+                        <input matInput [maxlength]="30" [(ngModel)]="authorName"/>
+                    </mat-form-field>
+                </c-col>
+                <c-col md="4" xl="4" xs="12" *ngIf="searchAdvance">
+                    <mat-form-field class="full-width">
+                        <mat-label>Mã bài viết</mat-label>
+                        <input matInput [maxlength]="30" [(ngModel)]="articleCode" />
+                    </mat-form-field>
+                </c-col>
+                <c-col md="4" xl="4" xs="12">
+                    <mat-form-field class="full-width">
+                        <mat-label>Từ ngày - Đến ngày</mat-label>
+                        <mat-date-range-input [rangePicker]="campaignTwoPicker">
+                            <input matStartDate placeholder="Từ ngày" [(ngModel)]="fromDate" dateTransform />
+                            <input matEndDate placeholder="Đến ngày" [(ngModel)]="toDate" dateTransform />
+                        </mat-date-range-input>
+                        <mat-datepicker-toggle matIconSuffix [for]="campaignTwoPicker"></mat-datepicker-toggle>
+                        <mat-date-range-picker #campaignTwoPicker></mat-date-range-picker>
+                    </mat-form-field>
+                </c-col>
+            </c-row>
+
+            <div class="form-group text-right">
+                <a class="text-link margin-r15" (click)="searchAdvance = !searchAdvance">Tìm kiếm nâng cao</a>
+                <button active="normal" color="info" cButton (click)="doSearch()">
+                    <svg cIcon name="cilZoom"></svg>
+                    Tìm kiếm
+                </button>
+                <button active="normal" color="success" class="margin-l5" cButton (click)="doDialog()">
+                    <svg cIcon name="cilPlus"></svg>
+                    Thêm mới
+                </button>
+            </div>
+        </mat-card-content>
+    </mat-card>
+    <grid-table [dataSource]="dataList" [tableColumns]="tableColumns" [tableAction]="tableAction"
+        [totalItems]="totalItems" (doChangePage)="doSearch($event)">
+    </grid-table>
+</div>

@@ -1,0 +1,367 @@
+<app-loading [loading]="loading"></app-loading>
+<div class="modal-header">
+    <h4 class="modal-title pull-left" [innerHTML]="title"></h4>
+</div>
+<div class="modal-body">
+    <form [formGroup]="articleForm">
+        <c-row class="margin-t15">
+            <c-col md="4" xl="4" xs="12">
+                <mat-form-field class="full-width">
+                    <mat-label>Ngôn ngữ</mat-label>
+                    <mat-select formControlName="langCode" (selectionChange)="onChangeLang($event)">
+                        <mat-option *ngFor="let obj of lstLangByPortal" [value]="obj.langCode">
+                            {{ obj.langName }}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error> Vui lòng nhập thông tin</mat-error>
+                </mat-form-field>
+            </c-col>
+            <c-col md="4" xl="4" xs="12">
+                <mat-form-field class="full-width">
+                    <mat-label>Chuyên mục bài viết</mat-label>
+                    <mat-select formControlName="menuCode" (ngModelChange)="onChangeMenuCode($event)">
+                        <mat-option *ngFor="let obj of listMenu" [value]="obj.menuCode">
+                            {{ obj.name }}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error> Vui lòng nhập thông tin</mat-error>
+                </mat-form-field>
+            </c-col>
+
+            <c-col md="4" xl="4" xs="12">
+                <mat-form-field class="full-width">
+                    <mat-label>Chuyên đề bài viết</mat-label>
+                    <mat-select formControlName="groupCode" (selectionChange)="onChangeGroupCode($event)">
+                        <mat-option *ngFor="let obj of lstArticleGroup" [value]="obj.groupCode">
+                            {{ obj.groupName }}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error> Vui lòng nhập thông tin</mat-error>
+                </mat-form-field>
+            </c-col>
+        </c-row>
+        <div *ngIf="artGroupType === 1">
+            <c-row class="margin-t15">
+                <c-col md="4" xl="4" xs="12">
+                    <mat-form-field class="full-width" style="margin-top: 10px;">
+                        <mat-label>Mã bài viết</mat-label>
+                        <input matInput formControlName="articleCode" />
+                        <mat-error> Vui lòng nhập thông tin</mat-error>
+                    </mat-form-field>
+                </c-col>
+                <c-col md="4" xl="4" xs="12">
+                    <mat-form-field class="full-width" style="margin-top: 10px;">
+                        <mat-label>Tên bài viết</mat-label>
+                        <input trim="blur" matInput formControlName="articleTitle" />
+                        <mat-error *ngIf="
+                                articleForm.controls['articleTitle'].hasError(
+                                    'required'
+                                )
+                            ">Vui lòng nhập thông tin
+                        </mat-error>
+                        <mat-error *ngIf="
+                                articleForm.controls['articleTitle'].hasError(
+                                    'maxlength'
+                                )
+                            ">
+                            Tên bài viết không được dài quá 2000 kí tự
+                        </mat-error>
+                    </mat-form-field>
+                </c-col>
+                <c-col md="4" xl="4" xs="12">
+                    <mat-form-field class="full-width" style="margin-top: 10px;">
+                        <mat-label>Tác giả</mat-label>
+                        <input trim="blur" matInput formControlName="authorsName" />
+                        <!-- <mat-error
+                            *ngIf="
+                                articleForm.controls['authorsName'].hasError(
+                                    'required'
+                                )
+                            "
+                            >Vui lòng nhập thông tin
+                        </mat-error> -->
+                        <mat-error *ngIf="
+                                articleForm.controls['authorsName'].hasError(
+                                    'maxlength'
+                                )
+                            ">
+                            Tác giả không được dài quá 500 kí tự
+                        </mat-error>
+                    </mat-form-field>
+                </c-col>
+            </c-row>
+            <c-row class="margin-t15">
+                <c-col md="4" xl="4" xs="12">
+                    <mat-form-field class="full-width">
+                        <mat-label>Thông tin tác giả</mat-label>
+                        <input trim="blur" matInput formControlName="authorsInfo" />
+                        <mat-error *ngIf="
+                                articleForm.controls['authorsInfo'].hasError(
+                                    'maxlength'
+                                )
+                            ">
+                            Thông tin tác giả không được dài quá 500 kí tự
+                        </mat-error>
+                    </mat-form-field>
+                </c-col>
+                <c-col md="4" xl="4" xs="12">
+                    <mat-form-field class="full-width">
+                        <mat-label>Nguồn bài viết</mat-label>
+                        <input trim="blur" matInput formControlName="articleSource" />
+                        <mat-error *ngIf="
+                                articleForm.controls['articleSource'].hasError(
+                                    'required'
+                                )
+                            ">Vui lòng nhập thông tin
+                        </mat-error>
+                        <mat-error *ngIf="
+                                articleForm.controls['articleSource'].hasError(
+                                    'maxlength'
+                                )
+                            ">
+                            Nguồn bài viết không được dài quá 300 kí tự
+                        </mat-error>
+                    </mat-form-field>
+                </c-col>
+                <c-col md="4" xl="4" xs="12">
+                    <mat-form-field class="full-width">
+                        <mat-label>Luồng duyệt</mat-label>
+                        <mat-select formControlName="flowCode" [disabled]="
+                                flowStepCurrent >= 0 && flowStepCurrent != null
+                            ">
+                            <mat-option *ngFor="let obj of lstFlows" [value]="obj.code">
+                                {{ obj.name }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error> Vui lòng nhập thông tin</mat-error>
+                    </mat-form-field>
+                </c-col>
+            </c-row>
+            <c-row class="margin-t15">
+                <c-col md="4" xl="4" xs="12">
+                    <mat-form-field class="full-width">
+                        <mat-label>Từ khóa</mat-label>
+                        <input trim="blur" matInput formControlName="keyWord" />
+                        <mat-error *ngIf="
+                                articleForm.controls['keyWord'].hasError(
+                                    'required'
+                                )
+                            ">Vui lòng nhập thông tin
+                        </mat-error>
+                        <mat-error *ngIf="
+                                articleForm.controls['keyWord'].hasError(
+                                    'maxlength'
+                                )
+                            ">
+                            Từ khóa không được dài quá 200 kí tự
+                        </mat-error>
+                    </mat-form-field>
+                </c-col>
+                <c-col md="4" xl="4" xs="12">
+                    <mat-form-field class="full-width">
+                        <mat-label>Thời gian xuất bản</mat-label>
+                        <input matInput dateTransform formControlName="publicationTime" [matDatepicker]="mdTgTu"
+                            placeholder="dd/MM/yyyy" />
+                        <mat-datepicker-toggle ng-readonly="true" matSuffix [for]="mdTgTu"></mat-datepicker-toggle>
+                        <mat-datepicker #mdTgTu ng-readonly="true"></mat-datepicker>
+                    </mat-form-field>
+                </c-col>
+                <c-col md="4" xl="4" xs="12">
+                    <mat-slide-toggle class="slide-toggle-custom" formControlName="priorityLevel" [disabled]="
+                    ((this.approvedStatus == 1 && this.flowStatus) || this.approvedStatus == 4) &&
+                    !this.roleAdmin
+                        ? true
+                        : false
+                        ">Hiển thị trên trang chủ
+                    </mat-slide-toggle>
+                    <mat-slide-toggle class="slide-toggle-custom" formControlName="displayTop" [disabled]="
+                    ((this.approvedStatus == 1 && this.flowStatus) || this.approvedStatus == 4) &&
+                    !this.roleAdmin
+                        ? true
+                        : false
+                        ">Hiển thị trên top trang chủ
+                    </mat-slide-toggle>
+                    <mat-slide-toggle class="slide-toggle-custom" formControlName="showArticleSource" [disabled]="
+                    ((this.approvedStatus == 1 && this.flowStatus) || this.approvedStatus == 4) &&
+                    !this.roleAdmin
+                        ? true
+                        : false
+                        ">Hiển thị nguồn trên trình duyệt
+                    </mat-slide-toggle>
+                </c-col>
+            </c-row>
+            <c-row class="margin-t15">
+                <c-col md="8" xl="8" xs="12">
+                    <mat-form-field class="full-width">
+                        <mat-label>Mô tả/Tóm tắt</mat-label>
+                        <textarea trim="blur" matInput formControlName="describe" rows="5"></textarea>
+                        <mat-error *ngIf="
+                                articleForm.controls['describe'].hasError(
+                                    'required'
+                                )
+                            ">Vui lòng nhập thông tin
+                        </mat-error>
+                        <mat-error *ngIf="
+                                articleForm.controls['describe'].hasError(
+                                    'maxlength'
+                                )
+                            ">
+                            Mô tả/Tóm tắt không được dài quá 2000 kí tự
+                        </mat-error>
+                    </mat-form-field>
+                </c-col>
+                <c-col md="4" xl="4" xs="12">
+                    <button *ngIf="isView" cButton color="info" class="margin-r15" (click)="doAttach()">
+                        <i class="fa fa-paperclip" aria-hidden="true"></i>&nbsp;Tệp đính kèm
+                    </button>
+                </c-col>
+            </c-row>
+
+            <!-- <c-row class="margin-t15">
+                <c-col md="12" xl="12" xs="12">
+                    <button
+                        *ngIf="isView"
+                        cButton
+                        color="info"
+                        class="margin-r15"
+                        (click)="doAttach()"
+                    >
+                        <i class="fa fa-picture-o"></i>&nbsp;Tệp đính kèm
+                    </button>
+                    <button *ngIf="isView" cButton color="info" class="margin-r15" (click)="doUploadDialog('btn')">
+                        <i class="fa fa-picture-o"></i>&nbsp;Chọn ảnh minh hoạ
+                    </button>
+                    <button cButton *ngIf="isView" color="success" class="margin-r15" (click)="fileWordImport.click()">
+                        <i class="fa fa-file-word-o"></i>&nbsp;Tải file biên tập
+                    </button>
+                    <input type="file" #fileWordImport (change)="changeFileImport($any($event).target.files)" hidden
+                        accept=".doc, .docx, application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+
+                    <button cButton *ngIf="isView" color="warning" class="margin-r15"
+                        (click)="fileWordOriginImport.click()">
+                        <i class="fa fa-file-word-o"></i>&nbsp;Tải file gốc
+                    </button>
+                    <input type="file" #fileWordImport id="fileWordImport"
+                        (change)="changeFileImport($any($event).target.files)" hidden
+                        accept=".doc, .docx, application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+                    <input type="file" #fileWordOriginImport id="fileWordOriginImport"
+                        (change)="changeFileOriginImport($any($event).target.files)" hidden
+                        accept=".doc, .docx, application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+                    <ul class="img-upload-privew" *ngIf="lstImgUpload && lstImgUpload.length > 0">
+                        <li>
+                            <mat-chip-list>
+                                <mat-chip *ngFor="let item of lstImgUpload; index as i" (click)="doUploadDialog('ava')"
+                                    matTooltip="{{ item.imgDisplayName }}">
+                                    <img matChipAvatar src="{{
+                                            'data:image/jpg;base64,' +
+                                                item.imgDisplay
+                                        }}" />
+                                    {{
+                                    item.imgDisplayName.length > 30
+                                    ? (item.imgDisplayName
+                                    | slice : 0 : 30) + "..."
+                                    : item.imgDisplayName
+                                    }}
+                                    <button matChipRemove (click)="removeImgAttach(i)">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </mat-chip>
+                            </mat-chip-list>
+                        </li>
+                    </ul>
+                    <ul class="img-upload-privew" *ngIf="fileWordOrigin">
+                        <li>
+                            <mat-chip-list>
+                                <mat-chip (click)="doViewFile()"
+                                    matTooltip="{{ fileWordOrigin && fileWordOrigin.name ? fileWordOrigin.name : '' }}">
+                                    {{
+                                    fileWordOrigin.name.length > 30
+                                    ? (fileWordOrigin.name
+                                    | slice : 0 : 30) + "..."
+                                    : fileWordOrigin.name
+                                    }}
+                                    <button matChipRemove (click)="removeFileOrg()">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </mat-chip>
+                            </mat-chip-list>
+                        </li>
+                    </ul>
+                </c-col>
+            </c-row> -->
+            <c-row class="margin-t15">
+                <c-col md="12" xl="12" xs="12">
+                    <ckeditor trim="blur" class="ckeditor-custome" [config]="config" [editor]="Editor"
+                        (ready)="onReady($event)" formControlName="content">
+                    </ckeditor>
+                    <mat-error *ngIf="
+                            articleForm.controls['content'].touched &&
+                            articleForm.controls['content'].invalid
+                        ">
+                        Vui lòng nhập thông tin
+                    </mat-error>
+                </c-col>
+            </c-row>
+        </div>
+        <div *ngIf="artGroupType === 2">
+            <c-row class="margin-t15">
+                <c-col md="4" xl="4" xs="12">
+                    <mat-form-field class="full-width">
+                        <mat-label>Luồng duyệt</mat-label>
+                        <mat-select formControlName="flowCode">
+                            <mat-option *ngFor="let obj of lstFlows" [value]="obj.code">
+                                {{ obj.name }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error> Vui lòng nhập thông tin</mat-error>
+                    </mat-form-field>
+                </c-col>
+                <c-col md="8" xl="8" xs="12">
+                    <button cButton color="info" class="margin-r15" (click)="doUploadDialog('btn')">
+                        <i class="fa fa-picture-o"></i>&nbsp;Chọn ảnh minh hoạ
+                    </button>
+                    <ul class="img-upload-privew" *ngIf="lstImgUpload && lstImgUpload.length > 0">
+                        <li>
+                            <mat-chip-list>
+                                <mat-chip *ngFor="
+                                        let item of lstImgUpload;
+                                        index as i
+                                    " (click)="doPreview(item)" (click)="doUploadDialog('ava')"
+                                    matTooltip="{{ item.imgDisplayName }}">
+                                    <img matChipAvatar src="{{
+                                            'data:image/jpg;base64,' +
+                                                item.imgDisplay
+                                        }}" />
+                                    {{
+                                    item.imgDisplayName.length > 30
+                                    ? (item.imgDisplayName
+                                    | slice : 0 : 30) + "..."
+                                    : item.imgDisplayName
+                                    }}
+                                    <button matChipRemove (click)="removeImgAttach(i)">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </mat-chip>
+                            </mat-chip-list>
+                        </li>
+                    </ul>
+                </c-col>
+            </c-row>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="margin-r15" color="success" cButton (click)="doSave(0)" *ngIf="enableSaveButton">
+        <svg cIcon name="cilSave"></svg>
+        Lưu
+    </button>
+    <button class="margin-r15" color="info" cButton (click)="doSave(1)" *ngIf="enableSaveAndSendButton"
+        [disabled]="checkApproveLast === true">
+        <svg cIcon name="cilSend"></svg>
+        Lưu & gửi duyệt
+    </button>
+    <button color="danger" cButton (click)="doClose()">
+        <svg cIcon name="cilX"></svg>
+        Đóng
+    </button>
+</div>

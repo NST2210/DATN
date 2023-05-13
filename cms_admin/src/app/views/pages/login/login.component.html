@@ -1,0 +1,214 @@
+<app-loading [loading]="loading"></app-loading>
+<div class="frm-wraper">
+    <div class="login-form">
+        <div class="form-item">
+            <div class="min-vh-100 d-flex flex-row align-items-center">
+                <div class="left-content">
+                    <div class="top">
+                        <img src="assets/img/login/logo_scroll.svg" />
+                        <div class="top-title">Hệ thống quản lý nội dung</div>
+                    </div>
+                    <div class="middle">
+                        <div class="d-flex flex-row align-items-center">
+                            <form
+                                cForm
+                                (ngSubmit)="doLogin()"
+                                class="form-width"
+                                [formGroup]="loginForm"
+                                *ngIf="showFormLogin"
+                            >
+                                <c-input-group class="mb-3">
+                                    <span cInputGroupText>
+                                        <svg cIcon name="cilUser"></svg>
+                                    </span>
+                                    <input
+                                        autoComplete="username"
+                                        cFormControl
+                                        placeholder="Tên đăng nhập"
+                                        formControlName="username"
+                                    />
+                                </c-input-group>
+                                <c-input-group class="mb-4">
+                                    <span cInputGroupText>
+                                        <svg cIcon name="cilLockLocked"></svg>
+                                    </span>
+                                    <input
+                                        autoComplete="current-password"
+                                        cFormControl
+                                        placeholder="Mật khẩu"
+                                        [type]="hide ? 'password' : 'text'"
+                                        formControlName="password"
+                                        style="border-right: none !important"
+                                    />
+
+                                    <span
+                                        cInputGroupText
+                                        class="text-link"
+                                        (click)="hide = !hide"
+                                        style="
+                                            background: transparent !important;
+                                            color: #eb2226;
+                                        "
+                                    >
+                                        <i
+                                            matSuffix
+                                            [ngClass]="
+                                                hide
+                                                    ? 'fa fa-eye-slash'
+                                                    : 'fa fa-eye'
+                                            "
+                                        ></i>
+                                    </span>
+                                </c-input-group>
+
+                                <c-row class="mb-4">
+                                    <c-col md="7">
+                                        <c-input-group>
+                                            <span cInputGroupText>
+                                                <svg cIcon name="cilBlur"></svg>
+                                            </span>
+                                            <input
+                                                cFormControl
+                                                placeholder="Mã bảo mật"
+                                                type="text"
+                                                formControlName="captcha"
+                                            />
+                                        </c-input-group>
+                                    </c-col>
+                                    <c-col md="5" style="position: relative">
+                                        <img
+                                            src="data:image/png;base64,{{
+                                                base64Captcha
+                                            }}"
+                                            class="imgCaptcha"
+                                        />
+
+                                        <span
+                                            class="text-link captcha-refresh"
+                                            (click)="getCaptcha()"
+                                        >
+                                            <i
+                                                class="fa fa-refresh"
+                                                aria-hidden="true"
+                                            ></i>
+                                        </span>
+                                    </c-col>
+                                </c-row>
+                                <c-row>
+                                    <c-col md="12" class="mb-3">
+                                        <button
+                                            cButton
+                                            cFormControl
+                                            class="btn-login btn-color-primary full-width"
+                                            color="primary"
+                                            type="submit"
+                                        >
+                                            Đăng nhập
+                                        </button>
+                                    </c-col>
+                                </c-row>
+                                <c-row>
+                                    <c-col md="12" class="text-right">
+                                        <span class="text-link"
+                                            ><a
+                                                style="color: #eb2226"
+                                                (click)="doFogotPass()"
+                                            >
+                                                Quên mật khẩu?</a
+                                            ></span
+                                        >
+                                    </c-col>
+                                </c-row>
+                            </form>
+                            <form
+                                cForm
+                                class="form-width"
+                                *ngIf="!showFormLogin"
+                                [formGroup]="forgotForm"
+                            >
+                                <c-input-group class="mb-2">
+                                    <span cInputGroupText>
+                                        <svg
+                                            cIcon
+                                            name="cilEnvelopeClosed"
+                                        ></svg>
+                                    </span>
+                                    <input
+                                        autoComplete="email"
+                                        cFormControl
+                                        placeholder="Nhập email"
+                                        formControlName="email"
+                                    />
+                                </c-input-group>
+                                <c-row class="mb-4">
+                                    <c-col md="7">
+                                        <c-input-group class="mb-3">
+                                            <span cInputGroupText>
+                                                <svg cIcon name="cilBlur"></svg>
+                                            </span>
+                                            <input
+                                                cFormControl
+                                                placeholder="Mã bảo mật"
+                                                type="text"
+                                                formControlName="captcha"
+                                            />
+                                        </c-input-group>
+                                    </c-col>
+                                    <c-col md="5" style="position: relative">
+                                        <img
+                                            src="data:image/png;base64,{{
+                                                base64Captcha
+                                            }}"
+                                            class="imgCaptcha"
+                                        />
+
+                                        <span
+                                            class="text-link captcha-refresh"
+                                            (click)="getCaptcha()"
+                                        >
+                                            <i
+                                                class="fa fa-refresh"
+                                                aria-hidden="true"
+                                            ></i>
+                                        </span>
+                                    </c-col>
+                                </c-row>
+                                <c-row class="mb-3">
+                                    <c-col md="12">
+                                        <button
+                                            cButton
+                                            class="btn-login btn-color-primary full-width"
+                                            color="primary"
+                                            type="submit"
+                                            (click)="doSendForgot()"
+                                        >
+                                            Quên mật khẩu
+                                        </button>
+                                    </c-col>
+                                </c-row>
+                                <c-row>
+                                    <c-col md="12" class="text-right">
+                                        <span class="text-link"
+                                            ><a
+                                                style="color: #eb2226"
+                                                (click)="doFogotPass()"
+                                            >
+                                                Bạn đã có tài khoản?</a
+                                            ></span
+                                        >
+                                    </c-col>
+                                </c-row>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="login-footer">
+        <span class="login-auth"
+            >&copy; 2022 <strong>VDSS</strong> - Hệ thống quản lý nội dung
+            </span
+        >
+    </div>
+</div>

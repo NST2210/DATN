@@ -1,0 +1,81 @@
+.round {
+    line-height: 48px;
+    color: #fff;
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    border-radius: 100%;
+    background: #01c0c8;
+}
+
+.round.round-success {
+    background: #00c292;
+}
+
+.round.round-info {
+    background: #01c0c8;
+}
+
+.round.round-danger {
+    background: #e46a76;
+}
+
+.text-muted {
+    color: #6c757d !important;
+}
+
+.d-icon {
+    font-size: 25px;
+    margin-top: 12px;
+}
+
+.chartWrapper {
+    position: relative;
+    overflow-x: scroll;
+}
+
+::-webkit-scrollbar {
+    position: relative;
+    left: 0;
+    display: inline-block;
+    width: 100%;
+    height: 15px;
+    top: -10px;
+    padding: 0;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c6c6c6;
+    border-radius: 8px;
+}
+
+.chartWrapper>canvas {
+    position: absolute;
+    left: 0;
+    top: 0;
+    pointer-events: none;
+    width: 100%;
+}
+
+.chartAreaWrapper {
+    width: 1300px;
+}
+
+
+
+.dasboard-number {
+    float: left;
+    width: 100%;
+    margin: 15px 0px;
+
+    .card-item {
+        float: left;
+        width: calc((100% - 40px)/ 5);
+    }
+
+    .card-item-marrgin{
+        margin: 0px 10px;
+    }
+}

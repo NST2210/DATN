@@ -1,0 +1,22 @@
+<div class="introduce">
+  <span class="introduce-title">{{lang.parseTextCommon("company")}}</span>
+</div>
+
+<div class="introduce-content">
+
+
+  <div class="content col-md-12 row" *ngFor="let item of listAllIntroduce; let i = index">
+    <div class="col-md-12">{{item.describe}}</div>
+    <!-- <div class="col-md-6" *ngIf="i%2 == 0">
+      <img src="{{ 'data:image/jpg;base64,' + item.imgDisplay }}">
+    </div> -->
+    <div class="col-md-12">
+      <!-- <span class="solution-sumary-contend-title" [innerHTML]="item.title"></span><br> -->
+      <span [innerHTML]="contentReplace"></span>
+    </div>
+    <!-- <div class="col-md-6" *ngIf="i%2 == 1">
+      <img src="{{ 'data:image/jpg;base64,' + item.imgDisplay }}">
+    </div> -->
+  </div>
+
+</div>

@@ -1,0 +1,192 @@
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item" *ngFor="let item of listAllIntroduce; let i = index" [ngClass]="{
+                'active':
+                  i == 0
+              }">
+      <span class="carousel-item-title" [innerHTML]="item.tittle"></span>
+      <img class="d-block w-100" src="{{ 'data:image/jpg;base64,' + item.imgDisplay }}" />
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+<!-- giai phap -->
+<div class="container-fluid cl-padding-lr ">
+  <div class="solutions">
+    <div class="wrap-body">
+      <div class="wrap-title">
+        <span routerLink="/solution"
+          class="is-router-link">{{lang.parseTextCommon("digital_technology_solutions")}}</span>
+        <a class="btn btn-view-news" (click)="doViewGroupSolution()">
+          {{lang.parseTextCommon("see_more")}}&nbsp;
+          <i class="fa-solid fa-arrow-right-long"></i></a>
+      </div>
+      <div class="row">
+        <div class="col-md-3 c-p sol-customer" *ngFor="let item of listSolution" (click)="doViewDetailSolution(item)">
+          <figure class="snip0019">
+            <img src="{{ 'data:image/jpg;base64,' + item.displayImg }}" alt="sample11" />
+            <figcaption>
+              <div class="solution-h3">
+                <h3>{{item.content}}</h3>
+              </div>
+              <div class="solution-description">
+                <p>
+                  {{item.description}}
+                </p>
+              </div>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- doi tac -->
+<div class="partner">
+  <div class="wrap-body">
+    <div class="wrap-title">
+      <span class="">{{lang.parseTextCommon("trusted_partner")}}</span>
+    </div>
+    <div class="partner-body">
+      <div class="slider">
+        <div class="slide-track">
+          <div class="slide">
+            <div class="partner-body-item" *ngFor="let item of listTrustedPartner"
+              (click)="gotoLinkTrustedPartner(item)">
+              <img src="{{ 'data:image/jpg;base64,' + item.logo }}" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Tin tuc su kien -->
+<div class="news">
+  <div class="wrap-body">
+    <div class="wrap-title">
+      <!-- <span routerLink="/news" class="is-router-link">{{lang.parseTextCommon("event_news")}}</span> -->
+      <span>{{lang.parseTextCommon("event_news")}}</span>
+      <a class="btn btn-view-news" routerLink="/news">
+        {{lang.parseTextCommon("see_more")}}&nbsp;
+        <i class="fa-solid fa-arrow-right-long"></i></a>
+    </div>
+    <div class="news-body">
+      <div class="row" *ngIf="listNew">
+        <div class="col-md-4 news-item c-p" *ngFor="let item of listNew" (click)="doViewDetailNew(item)">
+          <div class="col-md-12">
+            <div class="img-new-zoom">
+              <img *ngIf="item.imgDisplay" src="{{ 'data:image/jpg;base64,' + item.imgDisplay }}" />
+              <img *ngIf="!item.imgDisplay" src="../../../assets/home/logo_scroll.svg">
+            </div>
+          </div>
+          <div class="col-md-12">
+            <span class="new-detail">{{item.title}}</span>
+          </div>
+        </div>
+        <!-- thong tin lien he -->
+        <div class="contact">
+          <span class="contact-title">{{lang.parseTextCommon("contact_us")}}</span>
+          <form [formGroup]="feedbackForm" novalidate>
+            <div class="contact-form-wrapper">
+              <div class="contact-form">
+                <div class="row mb-20">
+                  <div class="col-md-4">
+                    <input type="text" maxlength="100" trim="blur" class="form-control is-invalid"
+                      formControlName="name" placeholder="{{lang.parseTextCommon('your_name')}}" [ngClass]="{
+                'is-invalid':
+                  isSubmitted && feedbackForm.controls['name'].errors
+              }" />
+                    <div class="invalid-feedback d-block-start"
+                      *ngIf="feedbackForm.controls['name'].errors?.['required']">
+                      {{lang.parseTextCommon("validate1")}}
+                    </div>
+                    <div class="invalid-feedback d-block-start"
+                      *ngIf="feedbackForm.controls['name'].errors?.['maxlength']">
+                      {{lang.parseTextCommon("validate2")}}
+                    </div>
+                    <div class="invalid-feedback d-block-start"
+                      *ngIf="feedbackForm.controls['name'].errors?.['pattern']">
+                      {{lang.parseTextCommon("validate7")}}
+                    </div>
+                    <br>
+                  </div>
+
+                  <div class="col-md-4 col-xs-12">
+                    <input type="text" class="form-control is-invalid" placeholder="{{lang.parseTextCommon('phone')}}"
+                      formControlName="mobilePhone" [ngClass]="{
+              'is-invalid':
+                isSubmitted && feedbackForm.controls['mobilePhone'].errors
+            }" />
+
+                    <div class="invalid-feedback d-block-start"
+                      *ngIf="feedbackForm.controls['mobilePhone'].errors?.['required']">
+                      {{lang.parseTextCommon("validate1")}}
+                    </div>
+                    <div class="invalid-feedback d-block-start"
+                      *ngIf="feedbackForm.controls['mobilePhone'].errors?.['maxlength']">
+                      {{lang.parseTextCommon("validate4")}}
+                    </div>
+                    <div class="invalid-feedback d-block-start"
+                      *ngIf="feedbackForm.controls['mobilePhone'].errors?.['pattern']">
+                      {{lang.parseTextCommon("validate3")}}
+                    </div>
+                    <br>
+                  </div>
+
+                  <div class="col-md-4 col-xs-12">
+                    <input placeholder="{{lang.parseTextCommon('email')}}" type="text" maxlength="100"
+                      class="form-control is-invalid" formControlName="email" [ngClass]="{
+                'is-invalid':
+                  isSubmitted && feedbackForm.controls['email'].errors
+              }" />
+                    <div class="invalid-feedback d-block-start"
+                      *ngIf="feedbackForm.controls['email'].errors?.['required']">
+                      {{lang.parseTextCommon("validate1")}}
+                    </div>
+                    <div class="invalid-feedback d-block-start"
+                      *ngIf="feedbackForm.controls['email'].errors?.['pattern']">
+                      {{lang.parseTextCommon("validate5")}}
+                    </div>
+                    <div class="invalid-feedback d-block-start"
+                      *ngIf="feedbackForm.controls['email'].errors?.['maxlength']">
+                      {{lang.parseTextCommon("validate2")}}
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row mb-20">
+                  <div class="col-md-12">
+                    <textarea trim="blur" matInput rows="6" cols="20" placeholder="{{lang.parseTextCommon('content')}}"
+                      [maxlength]="1000" class="form-control is-invalid" formControlName="content"
+                      (ngModelChange)="feedbackChange($event)" [ngClass]="{
+            'is-invalid': isSubmitted && feedbackForm.controls['content'].errors
+          }"></textarea>
+                    <div class="invalid-feedback d-block-start"
+                      *ngIf="feedbackForm.controls['content'].errors?.['required']">
+                      {{lang.parseTextCommon("validate1")}}
+                    </div>
+                    <div class="invalid-feedback d-block-start"
+                      *ngIf="feedbackForm.controls['content'].errors?.['maxlength']">
+                      {{lang.parseTextCommon("validate6")}}
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group text-center clear-margin">
+                  <button type="button" class="btn btn-sent" (click)="doFeedback()"><i
+                      class="fas fa-light fa-paper-plane">&nbsp;</i>{{lang.parseTextCommon("send")}}</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>

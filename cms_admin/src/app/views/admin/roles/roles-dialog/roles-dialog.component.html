@@ -1,0 +1,47 @@
+<app-loading [loading]="loading"></app-loading>
+<div class="modal-header">
+    <h4 class="modal-title pull-left" [innerHTML]="title"></h4>
+</div>
+<div class="modal-body">
+    <form [formGroup]="form" novalidate>
+        <c-row>
+            <c-col md="6" xl="6" xs="12">
+                <mat-form-field class="full-width">
+                    <mat-label>Mã quyền</mat-label>
+                    <input trim="blur" uppercaseText matInput formControlName="roleCode">
+                    <mat-error *ngIf="form.controls['roleCode'].hasError('maxlength')">
+                        Mã quyền không được dài quá 30 kí tự
+                    </mat-error>
+                    <mat-error *ngIf="form.controls['roleCode'].hasError('required')">
+                        Vui lòng nhập thông tin
+                    </mat-error>
+                </mat-form-field>
+            </c-col>
+            <c-col md="6" xl="6" xs="12">
+                <mat-form-field class="full-width">
+                    <mat-label>Tên quyền</mat-label>
+                    <input type="text" trim="blur" matInput formControlName="roleName">
+                    <mat-error *ngIf="form.controls['roleName'].hasError('maxlength')">
+                        Tên quyền không được dài quá 70 kí tự
+                    </mat-error>
+                    <mat-error *ngIf="form.controls['roleName'].hasError('required')">
+                        Vui lòng nhập thông tin
+                    </mat-error>
+                    <mat-error *ngIf="form.controls['roleName'].hasError('pattern')">
+                        Vui lòng nhập dữ liệu hợp lệ, không chứa các ký tự đặc biệt
+                    </mat-error>
+                </mat-form-field>
+            </c-col>
+        </c-row>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="margin-r15" color="info" cButton (click)="onSave()">
+        <svg cIcon name="cilSave"></svg>
+        Lưu
+    </button>
+    <button color="danger" cButton (click)="onClose()">
+        <svg cIcon name="cilX"></svg>
+        Đóng
+    </button>
+</div>

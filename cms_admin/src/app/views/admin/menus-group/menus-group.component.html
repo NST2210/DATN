@@ -1,0 +1,46 @@
+<app-loading [loading]="loading"></app-loading>
+<form [formGroup]="form">
+    <div class="animated fadeIn">
+        <mat-card>
+            <mat-card-header class="card-header-custom">
+                <mat-card-title>Thông tin tìm kiếm</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <c-row>
+                    <c-col md="6" xl="6" xs="12">
+                        <mat-form-field class="full-width">
+                            <mat-label>Tên menu</mat-label>
+                            <input matInput formControlName="name">
+                            <mat-error *ngIf="form.controls['name'].hasError('maxlength')"> Tên menu không được
+                                dài quá 70 kí tự
+                            </mat-error>
+                        </mat-form-field>
+                    </c-col>
+                    <c-col md="6" xl="6" xs="12">
+                        <mat-form-field class="full-width">
+                            <mat-label>Trạng thái</mat-label>
+                            <mat-select [(ngModel)]="isActive" [ngModelOptions]="{standalone: true}">
+                                <mat-option *ngFor="let obj of lstActiveStatus" [value]="obj.value">
+                                    {{ obj.name }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </c-col>
+                </c-row>
+                <div class="form-group text-right">
+                    <button active="normal" color="info" cButton (click)="doSearch()">
+                        <svg cIcon name="cilZoom"></svg>
+                        Tìm kiếm
+                    </button>
+                    <button active="normal" color="success" class="margin-l5" cButton (click)="openDialog('create')">
+                        <svg cIcon name="cilPlus"></svg>
+                        Thêm mới
+                    </button>
+                </div>
+            </mat-card-content>
+        </mat-card>
+        <grid-table [dataSource]="dataList" [tableColumns]="tableColumns" [tableAction]="tableAction"
+                    [totalItems]="totalItems" (doChangePage)="doSearch($event)">
+        </grid-table>
+    </div>
+</form>

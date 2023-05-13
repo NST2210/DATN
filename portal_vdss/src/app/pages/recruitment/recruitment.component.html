@@ -1,0 +1,69 @@
+<div class="recruitment">
+    <div class="recruitment-title">
+        <span class="recruitment-title-lb">{{lang.parseTextCommon("recruitment")}}</span>
+    </div>
+    <div class="recruitment-content">
+        <br>
+        <span class="rec-content-location">{{lang.parseTextCommon("now_available")}}<strong
+                style="color: #004d99;">{{numRecruitment}}</strong>{{lang.parseTextCommon("vacancies")}}</span>
+        <div class="row">
+            <div class="accordion" id="accordion-container">
+                <div class="accordion-item mb-24" *ngFor="let item of listRecruitment; let i = index">
+                    <div class="panel-heading" [id]="'heading' + i">
+                        <h4 class="panel-title mb-c">
+                            <a role="button" class="collapsed" type="button" data-bs-toggle="collapse"
+                                [attr.data-bs-target]="'#collapse' + i" aria-expanded="true"
+                                [attr.aria-controls]="'collapse' + i" style="text-decoration: none; color: black">
+                                <img class="icon icon-customer" src="{{ 'data:image/jpg;base64,' + item.imgDisplay }}">
+                                <div class="icon-detail">
+                                    {{item.title}}
+                                    <br>
+                                    <span class="collapse-items" [innerHTML]="item.describe"></span>
+                                </div>
+
+                            </a>
+                        </h4>
+                    </div>
+                    <div [id]="'collapse' + i" class="accordion-collapse collapse in"
+                        [attr.aria-labelledby]="'heading' + i" data-bs-parent="#accordion-container">
+                        <div class="accordion-body">
+                            <span [innerHTML]="item.content">
+                            </span>
+                            <div class="form-group clear-margin text-right">
+                                <button type="button" class="btn btn-primary btn-send"
+                                    (click)="openDialog(item)">{{lang.parseTextCommon("apply")}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="accordion" id="accordionContainer">
+                <div class="accordion-item mb-24" *ngFor="let item of listRecruitment; let i = index">
+                    <h2 class="accordion-header mb-c" [id]="'heading' + i">
+                        <a role="button" class="accordion-button" type="button" data-bs-toggle="collapse"
+                            [attr.data-bs-target]="'#collapse' + i" aria-expanded="true"
+                            [attr.aria-controls]="'collapse' + i">
+                            <img class="icon icon-customer"src="{{ 'data:image/jpg;base64,' + item.imgDisplay }}">
+                            {{item.title}}
+                            <br>
+                            <span class="collapse-items" [innerHTML]="item.subTitle"></span>
+                    </a>
+                    </h2>
+                    <div [id]="'collapse' + i" class="accordion-collapse collapse in"
+                        [attr.aria-labelledby]="'heading' + i" data-bs-parent="#accordionContainer">
+                        <div class="accordion-body">
+                            <span [innerHTML]="item.describe">
+                            </span>
+                            <div class="form-group clear-margin text-right">
+                                <button type="button" class="btn btn-primary btn-send" (click)="openDialog()">{{lang.parseTextCommon("apply")}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+
+    </div>
+
+
+</div>

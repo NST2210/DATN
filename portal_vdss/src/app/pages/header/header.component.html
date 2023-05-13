@@ -1,0 +1,54 @@
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" (scroll)="onScroll($event)">
+  <div class="container">
+    <a class="navbar-brand" href="#page-top">
+      <img class="nav-img" src="{{ 'data:image/jpg;base64,' + logo }}" />
+    </a>
+    <a class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+      aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+
+      <i class="fas fa-bars ms-1" ></i>
+  </a>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+        <li class="nav-item" *ngFor="let item of menus; let i = index">
+          <!-- <a class="nav-link" [routerLink]="item.menuUrl" [class.active]="isLinkActive(item.menuUrl)"
+            [innerHTML]="item.menuName"></a> -->
+          <a class="nav-link" [routerLink]="item.menuUrl" [class.active]="isLinkActive(item.menuUrl)" (click)="doViewGroup(item, i)"
+            [innerHTML]="item.menuName"></a>
+        </li>
+        <li class="nav-item" style="margin-top: -10px;" *ngIf="listLangCode">
+          <div class="dropdown">
+            <div class="item-langdf">
+            <img class="logoVN" src="{{ 'data:image/jpg;base64,' + langCodeSelect.langIcon }}" width="45px" height="33px" alt="..." />
+            </div>
+            <div class="dropdown-content">
+              <div class="item-lang" *ngFor="let item of listLangCode" (click)="langSelect(item)">
+                <img class="logoVN" src="{{ 'data:image/jpg;base64,' + item.langIcon }}" width="45px" height="33px"
+                  alt="..." />
+                <div class="title-lang" [class.active]="isLangActive(item.langCode)">{{item.langName}}</div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <!--<li class="nav-item">
+          <a class="nav-link" routerLink="/solutions" routerLinkActive="active">GIẢI PHÁP</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/introduce" routerLinkActive="active">GIỚI THIỆU</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/news" routerLinkActive="active">TIN TỨC</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/recruitment" routerLinkActive="active">TUYỂN DỤNG</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/contact" routerLinkActive="active">LIÊN HỆ</a>
+        </li>
+        <li class="nav-item">
+          <img class="logoVN" src="../../../assets/logo_vn.jpg" width="29px" height="21px" alt="..." />
+        </li>-->
+      </ul>
+    </div>
+  </div>
+</nav>

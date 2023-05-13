@@ -1,0 +1,174 @@
+<app-loading [loading]="loading"></app-loading>
+<div class="modal-header">
+    <h4 class="modal-title pull-left" [innerHTML]="title"></h4>
+</div>
+<div class="modal-body">
+    <mat-card style="border: #ccc 1px solid; box-shadow: none !important">
+        <mat-card-content>
+            <form [formGroup]="form" novalidate>
+                <c-row>
+                    <c-col md="4" xl="4" xs="12">
+                        <mat-form-field class="full-width">
+                            <mat-label>Tên portal</mat-label>
+                            <input matInput [(ngModel)]="portalName" [ngModelOptions]="{ standalone: true }" disabled />
+                        </mat-form-field>
+                    </c-col>
+                    <c-col md="4" xl="4" xs="12">
+                        <mat-form-field class="full-width">
+                            <mat-label>Ngôn ngữ</mat-label>
+                            <mat-select class="full-width" formControlName="langCode" (selectionChange)="
+                                    onChangeLangCode($event.value)
+                                ">
+                                <mat-option [value]="null">
+                                    ---Chọn ngôn ngữ---
+                                </mat-option>
+                                <mat-option *ngFor="let obj of lstLangByPortal" [value]="obj.langCode">
+                                    {{ obj.langName }}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="form.controls['langCode'].hasError('required')">
+                                Vui lòng nhập thông tin
+                            </mat-error>
+                        </mat-form-field>
+                    </c-col>
+                    <c-col md="4" xl="4" xs="12">
+                        <mat-form-field class="full-width">
+                            <mat-label>Tên menu</mat-label>
+                            <mat-select class="full-width" formControlName="menuCode">
+                                <mat-option [value]="null">
+                                    ---Chọn tên menu---
+                                </mat-option>
+                                <mat-option *ngFor="let obj of lstMenuByPortalAndLang" [value]="obj.menuCode">
+                                    {{ obj.name }}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="form.controls['menuCode'].hasError('required')">
+                                Vui lòng nhập thông tin
+                            </mat-error>
+                        </mat-form-field>
+                    </c-col>
+                </c-row>
+                <c-row>
+                    <c-col md="4" xl="4" xs="12">
+                        <mat-form-field class="full-width">
+                            <mat-label>Thể loại</mat-label>
+                            <mat-select class="full-width" formControlName="groupType">
+                                <mat-option [value]="null">
+                                    ---Chọn thể loại---
+                                </mat-option>
+                                <mat-option [value]="1"> Nội dung </mat-option>
+                                <mat-option [value]="2"> Hình ảnh </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="form.controls['groupType'].hasError('required')">
+                                Vui lòng nhập thông tin
+                            </mat-error>
+                        </mat-form-field>
+                    </c-col>
+                    <c-col md="4" xl="4" xs="12" *ngIf="isDisplayHome">
+                        <mat-slide-toggle class="slide-toggle-custom" formControlName="displayHome">
+                            Hiển thị trên trang chủ
+                        </mat-slide-toggle>
+                    </c-col>
+                </c-row>
+                <c-row>
+                    <c-col md="3" xl="3" xs="12">
+                        <button cButton color="info" (click)="fileField.click()">
+                            <i class="fa fa-picture-o"></i>&nbsp;Chọn file ảnh
+                        </button>
+                        <input type="file" #fileField (change)="changeFile($any($event).target.files)" hidden
+                            accept="image/*" />
+                    </c-col>
+                    <c-col md="3" xl="3" xs="12">
+                        <ul class="img-upload-privew" *ngIf="displayImgContent">
+                            <li>
+                                <mat-chip-list>
+                                    <mat-chip matTooltip="{{displayImgName}}" (click)=" doUploadDialog()">
+                                        <img matChipAvatar
+                                            src="{{'data:image/jpg;base64,' + (displayImgContent ? displayImgContent : '') }}" />
+                                        {{ displayImgName.length > 30 ? (displayImgName | slice:0:30) + '...' :
+                                        displayImgName
+                                        }}
+                                        <button type="button" matChipRemove (click)="removeFile()">
+                                            <i class="fa fa-times"></i>
+                                        </button>
+                                    </mat-chip>
+                                </mat-chip-list>
+                            </li>
+                        </ul>
+                    </c-col>
+                </c-row>
+            </form>
+            <c-row>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="text-center" style="width: 5%">
+                                STT
+                            </th>
+                            <th class="text-center" style="width: 8%" *ngIf="formType === 'create'">
+                                Chức năng
+                            </th>
+                            <th class="text-center" style="width: 15%">Mã chuyên mục</th>
+                            <th class="text-center" style="width: 30%">Tên chuyên mục</th>
+                            <th class="text-center" style="width: 30%">Mô tả chuyên mục</th>
+                            <th class="text-center" style="width: 22%">Thứ tự hiển thị</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of lstArticleCategoryByMenu; let i = index">
+                            <td class="text-center">{{ i + 1 }}</td>
+                            <td class="text-center" *ngIf="formType === 'create'">
+                                <ul class="table-action">
+                                    <li matTooltip="Xoá" (click)="doRemoveRow(item, i)">
+                                        <svg cIcon name="cilTrash"></svg>
+                                    </li>
+                                </ul>
+                            </td>
+                            <td>
+                                <input type="text" trim="blur" uppercaseText class="form-control"
+                                    placeholder="Nhập mã chuyên mục" [(ngModel)]="item.code" #code="ngModel" required
+                                    [maxLength]="30" [minlength]="1" [disabled]="formType !== 'create'" />
+                            </td>
+                            <td class="text-center">
+                                <input type="text" trim="blur" class="form-control" placeholder="Nhập tên chuyên mục"
+                                    [(ngModel)]="item.content" #content="ngModel" required [maxLength]="70"
+                                    [minlength]="1" [disabled]="formType === 'detail'" />
+                            </td>
+                            <td class="text-center">
+                                <input type="text" trim="blur" class="form-control" placeholder="Nhập mô tả chuyên mục"
+                                    [(ngModel)]="item.description" #content="ngModel" required [maxLength]="70"
+                                    [minlength]="1" [disabled]="formType === 'detail'" />
+                            </td>
+                            <td class="text-center">
+                                <input type="text" class="form-control" [(ngModel)]="item.displayOrder"
+                                    [disabled]="true" required />
+
+                            </td>
+                        </tr>
+                        <tr *ngIf="lstArticleCategoryByMenu.length === 0">
+                            <td class="text-center" colspan="5">Không có bản ghi</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </c-row>
+            <c-row style="margin-top: 2% ;">
+                <c-col md="12" xl="12" xs="12" class="text-right">
+                    <button active="normal" color="success" cButton (click)="doAddRow()" *ngIf="formType==='create'">
+                        <svg cIcon name="cilPlus"></svg>
+                        Thêm dòng
+                    </button>
+                </c-col>
+            </c-row>
+        </mat-card-content>
+    </mat-card>
+</div>
+<div class="modal-footer">
+    <button class="margin-r15" color="info" cButton (click)="savePortalArticleGroup()" *ngIf="formType !== 'detail'">
+        <svg cIcon name="cilSave"></svg>
+        Lưu
+    </button>
+    <button color="danger" cButton (click)="doClose()">
+        <svg cIcon name="cilX"></svg>
+        Đóng
+    </button>
+</div>

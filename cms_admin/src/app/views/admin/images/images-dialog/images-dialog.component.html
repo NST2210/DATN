@@ -1,0 +1,233 @@
+<app-loading [loading]="loading"></app-loading>
+<div class="modal-header">
+    <h4 class="modal-title pull-left" [innerHTML]="title"></h4>
+</div>
+<div class="modal-body">
+    <form [formGroup]="form" novalidate>
+        <mat-card>
+            <mat-card-header class="card-header-custom">
+                <mat-card-title>Thông tin chung</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div>
+                    <c-row>
+                        <c-col md="4" xl="4" xs="12">
+                            <mat-form-field class="full-width">
+                                <mat-label>Tên portal</mat-label>
+                                <input matInput [(ngModel)]="portalName" [ngModelOptions]="{standalone: true}" disabled>
+                            </mat-form-field>
+                        </c-col>
+                        <c-col md="4" xl="4" xs="12">
+                            <mat-form-field class="full-width">
+                                <mat-label>Ngôn ngữ</mat-label>
+                                <mat-select formControlName="langCode" (ngModelChange)="onChangeLang($event)">
+                                    <mat-option [value]="langCode">{{langName}}</mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="form.controls['langCode'].hasError('required')">
+                                    Vui lòng nhập thông tin
+                                </mat-error>
+                            </mat-form-field>
+                        </c-col>
+                        <c-col md="4" xl="4" xs="12">
+                            <mat-form-field class="full-width">
+                                <mat-label>Chuyên mục bài viết</mat-label>
+                                <mat-select formControlName="articleGroupCode">
+                                    <mat-option [value]="groupCode">{{groupName}}</mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="form.controls['articleGroupCode'].hasError('required')">
+                                    Vui lòng nhập thông tin
+                                </mat-error>
+                            </mat-form-field>
+                        </c-col>
+                    </c-row>
+                </div>
+
+                <c-row *ngIf="formType !== 'detail'">
+                    <c-col md="12" xl="12" xs="12">
+                        <mat-form-field class="full-width">
+                            <mat-label>Mô tả</mat-label>
+                            <textarea formControlName="description" type="text" trim="blur" matInput
+                                placeholder="Nhập thông tin mô tả....">
+                            </textarea>
+                            <mat-error *ngIf="form.controls['description'].hasError('maxlength')">
+                                Mô tả không được dài quá 1000 kí tự
+                            </mat-error>
+                            <mat-error *ngIf="form.controls['description'].hasError('required')">
+                                Vui lòng nhập thông tin
+                            </mat-error>
+                        </mat-form-field>
+                    </c-col>
+                </c-row>
+                <c-row>
+                    <c-col md="12" xl="12" xs="12" *ngIf="formType !== 'detail'">
+                        <button cButton color="info" (click)="fileField.click()">
+                            <i class="fa fa-picture-o"></i>&nbsp;Upload
+                        </button>
+                        <input type="file" #fileField (change)="changeFile($event)" hidden accept="video/*,image/*"
+                            multiple />
+                    </c-col>
+                </c-row>
+                <c-row>
+                    <c-col md="12" xl="12" xs="12">
+                        <ul class="img-upload-privew">
+                            <li>
+                                <mat-chip-list *ngFor="let item of listImageVideo; index as i">
+                                    <mat-chip (click)="doPreview(item)" matTooltip="{{ item.name }}"
+                                        *ngIf="item.fileContent.type!='video/mp4'">
+                                        <img matChipAvatar
+                                            src="{{ 'data:image/jpg;base64,' + (item.imgData ? item.imgData : '')}}" />
+                                        {{ (item.name).length > 30
+                                        ? (item.name | slice : 0 : 30) +
+                                        "..."
+                                        : item.name }}
+                                        <button matChipRemove (click)="removeFile(i)">
+                                            <i class="fa fa-times"></i>
+                                        </button>
+                                    </mat-chip>
+
+                                    <mat-chip (click)="doPreview(item)" matTooltip="{{ item.name }}"
+                                        *ngIf="item.fileContent.type==='video/mp4'">
+                                        {{ (item.name).length > 30
+                                        ? (item.name | slice : 0 : 30) +
+                                        "..."
+                                        : item.name }}
+                                        <button matChipRemove (click)="removeFile(i)">
+                                            <i class="fa fa-times"></i>
+                                        </button>
+                                    </mat-chip>
+                                </mat-chip-list>
+                            </li>
+                        </ul>
+                    </c-col>
+                </c-row>
+            </mat-card-content>
+        </mat-card>
+    </form>
+    <mat-card class="mat-card-custom">
+        <mat-card-header class="card-header-custom">
+            <mat-card-title>Hình ảnh/Video</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-tab-group animationDuration="500ms" [selectedIndex]="tabSelected"
+                (selectedIndexChange)="tabSelected = $event">
+                <mat-tab label="Hình ảnh">
+                    <div class="full-width " *ngFor="let item of listDataImg; index as i">
+                        <div class="container border_custom ">
+                            <div class="custom-30">
+                                <img src="{{'data:image/jpg;base64,' + (item.pathStorage) }}" class="imageChange"
+                                    (click)="doPreview(item)" />
+                            </div>
+                            <div class="custom-70">
+                                <ul>Người upload: {{item.createBy}}</ul>
+                                <ul>Ngày upload: {{item.createDate|date:'dd/MM/yyyy'}}</ul>
+                                <ul>Trạng thái hoạt động: {{item.isActive === 1 ? 'Đang hoạt động' : 'Không hoạt động'}}
+                                </ul>
+                                <ul>Trạng thái xuất bản: {{item.approvedStatus === 4 ? 'Đã xuất bản' : 'Chưa xuất bản'}}
+                                </ul>
+                                <ul>Mô tả:
+                                    <textarea style="width: 100%;" type="text" trim="blur" [maxLength]="1000"
+                                        [(ngModel)]="item.description"
+                                        disabled="{{item.approvedStatus===4? true:false||formType==='detail'?true:false}}"></textarea>
+                                </ul>
+                            </div>
+                            <div class="custom-10" *ngIf="formType !== 'detail'">
+                                <div class="btn_custom">
+                                    <button color="danger" cButton (click)="doDelete(item)" #tooltip="matTooltip"
+                                        matTooltip="Xóa" class=" margin-bt15"
+                                        disabled="{{item.approvedStatus===4? true:false}}">
+                                        <svg cIcon name="cilTrash"></svg>
+                                    </button>
+                                </div>
+                                <div class="btn_custom">
+                                    <button active="normal" color="success" cButton (click)="doChangeStatus(item)"
+                                        #tooltip="matTooltip" class=" margin-bt15" matTooltip="Chuyển trạng thái">
+                                        <svg cIcon name="cilLoopCircular"></svg>
+                                    </button>
+                                </div>
+                                <div class="btn_custom">
+                                    <button active="normal" color="success" cButton (click)="doUpdateDescribe(item)"
+                                        #tooltip="matTooltip" class=" margin-bt15" matTooltip="Cập nhật mô tả"
+                                        disabled="{{item.approvedStatus===4? true:false}}">
+                                        <svg cIcon name="cilClipboard"></svg>
+                                    </button>
+                                </div>
+                                <div class="btn_custom">
+                                    <button active="normal" color="info" cButton (click)="downloadFile(item)"
+                                        #tooltip="matTooltip" matTooltip="Download">
+                                        <svg cIcon name="cilCloudDownload"></svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <mat-paginator [length]="totalItemsImg" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 15, 20]"
+                        (page)="doSearchDataImg($event)">
+                    </mat-paginator>
+                </mat-tab>
+                <mat-tab label="Video">
+                    <div class="full-width" *ngFor="let item of listDataVideo; index as i">
+                        <div class="container border_custom ">
+                            <div class="custom-30">
+                                <video class="imageChange" (click)="toggleVideo()" #videoPlayer controls>
+                                    <source src="{{'data:video/mp4;base64,' + (item.pathStorage) }}" type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="custom-70">
+                                <ul>Người upload: {{item.createBy}}</ul>
+                                <ul>Ngày upload: {{item.createDate|date:'dd/MM/yyyy'}}</ul>
+                                <ul>Trạng thái hoạt động: {{item.isActive === 1 ? 'Đang hoạt động' : 'Không hoạt động'}}
+                                </ul>
+                                <ul>Trạng thái xuất bản: {{item.approvedStatus === 4 ? 'Đã xuất bản' : 'Chưa xuất bản'}}
+                                </ul>
+                                <ul>Mô tả:
+                                    <textarea style="width: 100%;" type="text" trim="blur" [maxLength]="1000"
+                                        [(ngModel)]="item.description"
+                                        disabled="{{item.approvedStatus===4? true:false||formType==='detail'?true:false}}"></textarea>
+                                </ul>
+                            </div>
+                            <div class="custom-10" *ngIf="formType !== 'detail'">
+                                <div class="btn_custom">
+                                    <button color="danger" cButton (click)="doDelete(item)" #tooltip="matTooltip"
+                                        matTooltip="Xóa" class=" margin-bt15"
+                                        disabled="{{item.approvedStatus===4? true:false}}">
+                                        <svg cIcon name="cilTrash"></svg>
+                                    </button>
+                                </div>
+
+                                <div class="btn_custom">
+                                    <button active="normal" color="success" cButton (click)="doChangeStatus(item)"
+                                        #tooltip="matTooltip" matTooltip="Chuyển trạng thái" class=" margin-bt15">
+                                        <svg cIcon name="cilLoopCircular"></svg>
+                                    </button>
+                                </div>
+                                <div class="btn_custom">
+                                    <button active="normal" color="success" cButton (click)="doUpdateDescribe(item)"
+                                        #tooltip="matTooltip" matTooltip="Cập nhật mô tả" class=" margin-bt15"
+                                        disabled="{{item.approvedStatus===4? true:false}}">
+                                        <svg cIcon name="cilClipboard"></svg>
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <mat-paginator [length]="totalItemsVideo" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 15, 20]"
+                        (page)="doSearchDataVideo($event)">
+                    </mat-paginator>
+                </mat-tab>
+            </mat-tab-group>
+        </mat-card-content>
+    </mat-card>
+
+</div>
+
+<div class="modal-footer">
+    <button class="margin-r15" color="info" cButton (click)="doSave()" *ngIf="formType !== 'detail'">
+        <svg cIcon name="cilSave"></svg>
+        Lưu
+    </button>
+    <button color="danger" cButton (click)="doClose()">
+        <svg cIcon name="cilX"></svg>
+        Đóng
+    </button>
+</div>

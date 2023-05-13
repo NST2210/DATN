@@ -1,0 +1,60 @@
+<app-loading [loading]="loading"></app-loading>
+<c-row class="margin-t15 clear-margin-left clear-margin-right">
+    <c-col class="cler-padding-left cler-padding-right" md="12" xl="12" xs="12">
+        <button cButton color="info" (click)="fileField.click()">
+            <i class="fa fa-picture-o"></i>&nbsp;Chọn file logo
+        </button>
+        <input type="file" #fileField (change)="changeFile($any($event).target.files,'default')" hidden
+            accept="image/*" />
+        <ul class="img-upload-privew" *ngIf="footerDetail.logo">
+            <li>
+                <mat-chip-list>
+                    <mat-chip matTooltip="footerDetail.logoName" (click)=" doUploadDialog('default')">
+                        <img matChipAvatar
+                            src="{{'data:image/jpg;base64,' + (footerDetail.logo ? footerDetail.logo : '') }}" /> {{
+                        (footerDetail.logoName || '').length> 10 ? (footerDetail.logoName | slice:0:10)
+                        +
+                        '...'
+                        : footerDetail.logoName}}
+                        <button type="button" matChipRemove (click)="removeFile('default')">
+                            <i class="fa fa-times"></i>
+                        </button>
+                    </mat-chip>
+                </mat-chip-list>
+            </li>
+        </ul>
+    </c-col>
+
+    <c-col class="cler-padding-left cler-padding-right" md="12" xl="12" xs="12">
+        <button cButton color="info" (click)="fileFieldScroll.click()">
+            <i class="fa fa-picture-o-scroll"></i>&nbsp;Chọn file logo scroll
+        </button>
+        <input type="file" #fileFieldScroll (change)="changeFile($any($event).target.files,'scroll')" hidden
+            accept="image/*" />
+        <ul class="img-upload-privew" *ngIf="footerDetail.logoScroll">
+            <li>
+                <mat-chip-list>
+                    <mat-chip matTooltip="footerDetail.logoScrollName" (click)=" doUploadDialog('scroll')">
+                        <img matChipAvatar
+                            src="{{'data:image/jpg;base64,' + (footerDetail.logoScroll ? footerDetail.logoScroll : '') }}" />
+                        {{ (footerDetail.logoScrollName || '').length> 10 ? (footerDetail.logoScrollName | slice:0:10)
+                        +
+                        '...'
+                        : footerDetail.logoScrollName}}
+                        <button type="button" matChipRemove (click)="removeFile('scroll')">
+                            <i class="fa fa-times"></i>
+                        </button>
+                    </mat-chip>
+                </mat-chip-list>
+            </li>
+        </ul>
+    </c-col>
+</c-row>
+
+<c-row class="margin-t15 clear-margin-left clear-margin-right">
+    <c-col class="cler-padding-left cler-padding-right" md="12" xl="12" xs="12">
+        <ckeditor class="ckeditor-custome" [editor]="Editor" (ready)="onReady($event)"
+            [(ngModel)]="footerDetail.content">
+        </ckeditor>
+    </c-col>
+</c-row>

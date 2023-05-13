@@ -1,0 +1,195 @@
+$app-color-primary: #eb2226;
+
+.form-width {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.btn-color-primary {
+    background-color: $app-color-primary;
+    border-color: $app-color-primary;
+}
+
+.frm-wraper {
+    width: 100vw;
+    height: 100vh;
+    background: url(../../../../assets/img/login/bg.png);
+    // background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #fff;
+    overflow: auto;
+}
+
+.login-form {
+    float: left;
+    width: 100%;
+    height: calc(100vh - 50px);
+
+    .form-item {
+        float: left;
+        width: 100%;
+    }
+}
+
+.login-form-title {
+    font-size: 25px;
+    margin-bottom: 25px;
+    float: left;
+}
+
+.login-footer {
+    float: left;
+    width: 100%;
+    height: 50px;
+    position: relative;
+
+    .login-auth {
+        float: left;
+        width: 100%;
+        text-align: center;
+        margin-top: 25px;
+        font-size: 0.8125rem;
+        font-weight: 500;
+        line-height: 1.5;
+        // color: $app-color-primary;
+    }
+
+    .btn-regis {
+        position: absolute;
+        right: 20px;
+        border-radius: 999rem;
+    }
+}
+
+.input-group-text {
+    background-color: $app-color-primary !important;
+    color: #fff;
+}
+
+.left-content {
+    width: 40%;
+    margin: 0 auto;
+
+    .top {
+        text-align: center;
+
+        img {
+            width: 47%;
+            margin-bottom: 15px;
+        }
+
+        .top-title {
+            font-size: 18px;
+            font-weight: 550;
+            text-transform: uppercase;
+            padding-top: 15px;
+        }
+    }
+
+    .middle {
+        text-align: center;
+        margin-top: 20px;
+
+        img {
+            width: 100%;
+        }
+    }
+
+    .bottom {
+        float: left;
+        width: 100%;
+        margin-top: 30px;
+
+        .bottom-item {
+            float: left;
+            width: 50%;
+            align-items: center;
+            margin-top: 20px;
+
+            img {
+                float: left;
+                width: 40px;
+                height: 40px;
+                margin-right: 10px;
+
+                border: $app-color-primary 1px solid;
+                border-radius: 8px;
+                padding: 5px;
+            }
+
+            span {
+                float: left;
+                width: calc(100% - 50px);
+                padding-right: 10px;
+                text-align: justify;
+                font-size: 16px;
+                font-weight: 500;
+                line-height: 25px;
+            }
+        }
+    }
+}
+
+.captcha-refresh {
+    position: absolute;
+    right: calc(var(--cui-gutter-x) * 1);
+    top: 25%;
+    color: #fff;
+}
+
+.imgCaptcha {
+    border-radius: 5px;
+    height: 38px;
+}
+
+// @media only screen and (min-width : 1200px) {
+//     .captcha-refresh {
+//         font-size: 35px;
+//     }
+// }
+
+// @media only screen and (min-width:980px) {
+//     .captcha-refresh {
+//         font-size: 35px;
+//     }
+// }
+
+/*Smart phone nhỏ*/
+@media screen and (min-width: 240px) {
+    .captcha-refresh {
+        font-size: 18px;
+    }
+}
+
+/*Iphone(480 x 640)*/
+@media screen and (min-width: 320px) {
+    .captcha-refresh {
+        font-size: 18px;
+    }
+}
+
+/*Tablet nhỏ(480 x 640)*/
+@media screen and (min-width: 480px) {
+    .captcha-refresh {
+        font-size: 18px;
+    }
+}
+
+/*Ipad dọc(768 x 1024)*/
+@media screen and (max-width: 768px) {
+    .captcha-refresh {
+        font-size: 18px !important;
+    }
+}
+
+/*Ipad ngang(1024 x 768)*/
+@media screen and (min-width: 1024px) {
+    .captcha-refresh {
+        font-size: 18px;
+    }
+}

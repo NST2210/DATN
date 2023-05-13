@@ -1,0 +1,70 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+/dist
+/dist-server
+/tmp
+/out-tsc
+
+# dependencies
+/node_modules
+package-lock.json
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
+
+# e2e
+/e2e/*.js
+/e2e/*.map
+
+# System Files
+.DS_Store
+Thumbs.db
+.angular/cache/13.1.4/angular-webpack/4a38b41d528e11cf35a2fd33699ae5c2730f6584/0.pack
+.angular/cache/13.1.4/angular-webpack/4a38b41d528e11cf35a2fd33699ae5c2730f6584/index.pack
+.angular/cache/13.1.4/babel-webpack/221994fdcc8fd04d44d319f0c60144d5.json
+.angular/cache/13.1.4/babel-webpack/23ca66f16c9f0488c049338ecc8af47a.json
+.angular/cache/13.1.4/babel-webpack/2628ef78c43ee6dc9d5512915d5b02c1.json
+.angular/cache/13.1.4/babel-webpack/2a90e384e53ecdf5ee1ee2d4101f83f1.json
+.angular/cache/13.1.4/babel-webpack/2ee349f969dcbbebc68ff181b5a74879.json
+.angular/cache/13.1.4/babel-webpack/3b72565fa0952d7b1c5d5b3f8099e4ec.json
+.angular/cache/13.1.4/babel-webpack/3e732c8660e053dcc15bdedf6d56caa6.json
+.angular/cache/13.1.4/babel-webpack/599bf1a2cddca668f4c4899acb568973.json
+.angular/cache/13.1.4/babel-webpack/89dc0cef673989a690f14f9c057a3839.json
+.angular/cache/13.1.4/babel-webpack/8be3f01c9b2791cc4d5b51787e8afa59.json
+.angular/cache/13.1.4/babel-webpack/921b8ed9d18c046a9ae88a6033c08795.json
+.angular/cache/13.1.4/babel-webpack/924de61c2ba1c427ada3623004c790e7.json
+.angular/cache/13.1.4/babel-webpack/9cc628a3a5e05ccec0abd0e7d340f2fc.json
+.angular/cache/13.1.4/babel-webpack/a000710eb90faeb26e416777379b6f8c.json
+.angular/cache/13.1.4/babel-webpack/a22a85a1ff23f20861da4bbceff6aef8.json
+.angular/cache/13.1.4/babel-webpack/c602c093e1e9ccfaa585f4bffb16ff17.json
+.angular/cache/13.1.4/babel-webpack/e2f09f50903182f526ca1cd81cbe8896.json
+.angular/cache/13.1.4/babel-webpack/ebbdcff2bf8cb8872712c1d373ecdd94.json
+.angular/cache/13.1.4/babel-webpack/f4c0729935e07509f54b82004b0d5c13.json
+.angular/cache/13.1.4/babel-webpack/f5ac11aa597aa91a7929205a6558f366.json
+.angular/cache/13.1.4/babel-webpack/fc0925f381f9970407689cd95b44b520.json
+.vscode/launch.json
+.angular/

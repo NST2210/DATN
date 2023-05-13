@@ -1,0 +1,92 @@
+// ThaiVV
+$spacing-body: 10%;
+.introduce {
+    background: url(../../../assets/introduce/introduce.png) center center no-repeat;
+    background-size: cover;
+    will-change: transform;
+    // padding: 30px;
+    padding: 0px $spacing-body;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .introduce-title {
+        width: 62%;
+        font-weight: 700;
+        font-size: 44px;
+        line-height: 56px;
+        letter-spacing: 0.01em;
+        color: #FFFFFF;
+    }
+}
+
+.introduce-content {
+    align-items: center;
+    padding: 0% 8% 0% 8%;
+}
+
+.content {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 36px;
+    letter-spacing: 0.005em;
+    color: #262626;
+    text-align: justify;
+    padding: 2%;
+
+  .solution-sumary-contend-title {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+}
+::ng-deep .image-style-align-left {
+    float: left;
+    // width: 100%;
+}
+::ng-deep .image-style-align-right{
+    float: right !important;
+}
+::ng-deep .image-style-align-right img{
+    margin: 0px 15px !important;
+}
+
+@media (max-width: 768px) {
+    $spacing-body: 4% !important;
+    .introduce {
+        padding: 0px $spacing-body;
+        // height: auto;
+    }
+
+    .introduce-title {
+        padding: 0px $spacing-body;
+        width: 100% !important;
+        font-weight: 700;
+        font-size: 32px !important;
+        line-height: 56px;
+    }
+
+    .introduce-content {
+        align-items: center;
+        padding: 0px $spacing-body;
+    }
+
+    .content {
+        padding: 0% !important;
+    }
+
+    ::ng-deep figure {
+        width: 100% !important;
+    }
+
+    ::ng-deep img {
+        margin: 0px !important;
+    }
+    ::ng-deep .image-style-align-right img{
+        margin: 0px !important;
+    }
+
+  }

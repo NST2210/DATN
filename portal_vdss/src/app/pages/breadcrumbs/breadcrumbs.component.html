@@ -1,0 +1,13 @@
+<div class="col">
+  <ol class="breadcrumb" *ngIf="items">
+    <li class="breadcrumb-item" *ngFor="let item of items; let i = index" [class.active]="i===items.length-1">
+      <a (click)="redirectPage(item.url)" class=" underline-on-hover" *ngIf="i!==items.length-1">
+        {{ item?.label }}
+      </a>
+      <a (click)="redirectPage(item.url)" class=" underline-on-hover" *ngIf="i===items.length-1"
+        style="color: #ffc800;">
+        {{ item?.label }}
+      </a>
+    </li>
+  </ol>
+</div>

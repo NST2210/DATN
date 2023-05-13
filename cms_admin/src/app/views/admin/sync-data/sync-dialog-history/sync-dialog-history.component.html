@@ -1,0 +1,53 @@
+<app-loading [loading]="loading"></app-loading>
+<div class="modal-body">
+    <div class="animated fadeIn">
+        <mat-card>
+            <mat-card-header class="card-header-custom">
+                <mat-card-title>Lịch sử đồng bộ</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th class="text-center w5">STT</th>
+                                <th class="text-center ">Người đồng bộ</th>
+                                <th class="text-center ">
+                                    Ngày đồng bộ
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of dataList; let i = index">
+                                <td class="text-center">{{ i + 1 +(pageSize*page)}}</td>
+                                <td class="text-center">{{ item.createBy }}</td>
+                                <td class="text-center">
+                                    {{
+                                        item.createDate
+                                            | date : "dd/MM/yyyy HH:mm:ss"
+                                    }}
+                                </td>
+                            </tr>
+                            <tr *ngIf="dataList.length === 0">
+                                <td class="text-center" colspan="5">
+                                    Không bản ghi nào
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <mat-paginator [length]="totalItem" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 15, 20]"
+                (page)="doSearch($event)">
+            </mat-paginator>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    
+    <div class="modal-footer">
+        <button color="danger" cButton (click)="doClose()">
+            <svg cIcon name="cilX"></svg>
+            Đóng
+        </button>
+    </div>
+</div>
+

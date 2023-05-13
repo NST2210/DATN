@@ -1,0 +1,154 @@
+<mat-card class="mat-card-custom">
+    <div class="row card-header-custom">
+        <div class="col-md-6">
+            <mat-card-title class="custom-card-title">
+                Kết quả tìm kiếm
+            </mat-card-title>
+        </div>
+        <div class="col-md-6 text-right">
+            <button
+                class="card-action"
+                mat-icon-button
+                color="primary"
+                [matMenuTriggerFor]="menu"
+                matTooltip="Ẩn hiện cột"
+            >
+                <svg cIcon name="cilListFilter"></svg>
+            </button>
+
+            <mat-menu #menu="matMenu">
+                <button
+                    mat-menu-item
+                    (click)="$event.stopPropagation()"
+                    *ngFor="let column of tableColumns; index as i"
+                >
+                    <mat-checkbox
+                        color="primary"
+                        [(ngModel)]="column.view"
+                        (ngModelChange)="changeViewColumn(column, i)"
+                    >
+                        {{ column.label }}
+                    </mat-checkbox>
+                </button>
+            </mat-menu>
+        </div>
+    </div>
+    <mat-card-content>
+        <table mat-table [dataSource]="dataSource">
+            <ng-container matColumnDef="no">
+                <th
+                    style="width: 5%"
+                    class="text-center"
+                    mat-header-cell
+                    *matHeaderCellDef
+                >
+                    STT
+                </th>
+                <td
+                    class="text-center"
+                    mat-cell
+                    *matCellDef="let item; let i = index"
+                >
+                    {{ page * pageSize + (i + 1) }}
+                </td>
+            </ng-container>
+            <ng-container *ngIf="showCheckbox" matColumnDef="checkbox">
+                <th
+                    style="width: 5%"
+                    class="text-center"
+                    mat-header-cell
+                    *matHeaderCellDef
+                >
+                    <mat-checkbox
+                        [(ngModel)]="checkAll"
+                        (change)="onCheckAll($event)"
+                    ></mat-checkbox>
+                </th>
+                <td class="text-center" mat-cell *matCellDef="let item">
+                    <mat-checkbox
+                        [(ngModel)]="item.checked"
+                        (change)="onCheckItem($event)"
+                    ></mat-checkbox>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="func">
+                <th
+                    style="width: 8%"
+                    class="text-center"
+                    mat-header-cell
+                    *matHeaderCellDef
+                >
+                    Chức năng
+                </th>
+                <td class="text-center" mat-cell *matCellDef="let item">
+                    <ul class="table-action">
+                        <span *ngFor="let action of tableAction">
+                            <li
+                                class="text-link"
+                                *ngIf="checkDisplay(action, item)"
+                                matTooltip="{{ viewTooltipName(action, item) }}"
+                                (click)="doClickAction(action, item)"
+                            >
+                                <svg
+                                    *ngIf="action.iconType === 0"
+                                    cIcon
+                                    name="{{ viewIconName(action, item) }}"
+                                ></svg>
+                                <i
+                                    *ngIf="action.iconType === 1"
+                                    class="{{ viewIconName(action, item) }}"
+                                ></i>
+                            </li>
+                        </span>
+                    </ul>
+                </td>
+            </ng-container>
+
+            <ng-container
+                [matColumnDef]="column.name"
+                *ngFor="let column of columnsView"
+            >
+                <th
+                    [style.width]="
+                        column.options && column.options.width
+                            ? column.options.width
+                            : 'auto'
+                    "
+                    class="text-center"
+                    mat-header-cell
+                    *matHeaderCellDef
+                >
+                    {{ column.label }}
+                </th>
+                <td
+                    mat-cell
+                    [ngClass]="
+                        column.options && column.options.align
+                            ? column.options.align
+                            : ''
+                    "
+                    *matCellDef="let item; let i = index"
+                    [innerHtml]="renderValue(item, column, i)"
+                ></td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            <tr class="mat-row" *matNoDataRow>
+                <td
+                    class="mat-cell text-center"
+                    [attr.colspan]="displayedColumns.length"
+                >
+                    Không có dữ liệu
+                </td>
+            </tr>
+        </table>
+        <mat-paginator
+            [length]="totalItems"
+            [pageSize]="pageSize"
+            [pageSizeOptions]="[5, 10, 15, 20]"
+            (page)="onChangePage($event)"
+        >
+        </mat-paginator>
+    </mat-card-content>
+</mat-card>

@@ -1,0 +1,140 @@
+<app-loading [loading]="loading"></app-loading>
+<div class="modal-header justify-content-start">
+    <h4 class="modal-title pull-left"></h4>
+    <div class="fs-5">Thông tin tài khoản</div>
+</div>
+<div class="modal-body bg-light">
+    <form [formGroup]="form">
+        <mat-card class="mb-3">
+            <c-row>
+                <c-col md="4" xl="4" xs="12">
+                    <mat-form-field class="full-width">
+                        <mat-label>Tên tài khoản</mat-label>
+                        <input matInput formControlName="userName" />
+                    </mat-form-field>
+                </c-col>
+                <c-col md="4" xl="4" xs="12">
+                    <mat-form-field class="full-width">
+                        <mat-label>Email</mat-label>
+                        <input matInput formControlName="email" />
+                    </mat-form-field>
+                </c-col>
+                <c-col md="4" xl="4" xs="12">
+                    <mat-form-field class="full-width">
+                        <mat-label>Quyền người dùng</mat-label>
+                        <input matInput formControlName="roleName" />
+                    </mat-form-field>
+                </c-col>
+            </c-row>
+        </mat-card>
+        <mat-card>
+            <c-row>
+                <div class="my-3">
+                    <span>Đổi mật khẩu</span>
+                </div>
+            </c-row>
+            <c-row>
+                <c-col md="6" xl="6" xs="12">
+                    <mat-form-field class="full-width">
+                        <mat-label>Nhập mật khẩu cũ</mat-label>
+                        <input
+                            matInput
+                            placeholder="Mật khẩu cũ"
+                            [type]="hideOldPass ? 'password' : 'text'"
+                            formControlName="oldPass"
+                        />
+                        <i
+                            matSuffix
+                            (click)="hideOldPass = !hideOldPass"
+                            [ngClass]="
+                                hideOldPass ? 'fa fa-eye-slash' : 'fa fa-eye'
+                            "
+                        ></i>
+                    </mat-form-field>
+                </c-col>
+                <c-col md="6" xl="6" xs="12">
+                    <mat-form-field class="full-width">
+                        <mat-label>Nhập mật khẩu mới</mat-label>
+                        <input
+                            matInput
+                            placeholder="Mật khẩu mới"
+                            [type]="hideNewPass ? 'password' : 'text'"
+                            formControlName="newPass"
+                        />
+                        <mat-error
+                            *ngIf="
+                                form.controls['newPass'].hasError('maxlength')
+                            "
+                        >
+                            Mật khẩu mới không được dài quá 20 kí tự
+                        </mat-error>
+                        <mat-error
+                            *ngIf="
+                                form.controls['newPass'].hasError('required')
+                            "
+                        >
+                            Vui lòng nhập thông tin
+                        </mat-error>
+                        <mat-error
+                            *ngIf="form.controls['newPass'].hasError('pattern')"
+                        >
+                            Vui lòng nhập mật khẩu có tối thiểu 8 ký tự, ít nhất
+                            một chữ in hoa, một chữ thường, một số và một ký tự
+                            đặc biệt.
+                        </mat-error>
+                        <i
+                            matSuffix
+                            (click)="hideNewPass = !hideNewPass"
+                            [ngClass]="
+                                hideNewPass ? 'fa fa-eye-slash' : 'fa fa-eye'
+                            "
+                        ></i>
+                    </mat-form-field>
+                    <mat-error> </mat-error>
+                </c-col>
+            </c-row>
+            <c-row class="mt-4">
+                <c-col md="6" xl="6" xs="12">
+                    <mat-form-field class="full-width">
+                        <mat-label>Nhập captcha</mat-label>
+                        <input
+                            matInput
+                            placeholder="Mã captcha"
+                            formControlName="captcha"
+                        />
+                    </mat-form-field>
+                </c-col>
+                <c-col md="6" xl="6" xs="12">
+                    <img
+                        src="data:image/png;base64,{{
+                            base64Captcha ? base64Captcha : ''
+                        }}"
+                        style="
+                            height: 68%;
+                            float: left;
+                            border-radius: 0.375rem;
+                            width: 80%;
+                        "
+                    />
+                    <span
+                        class="text-link captcha-refresh"
+                        (click)="getCaptcha()"
+                        style="height: 45px"
+                    >
+                        <i class="fa fa-refresh" aria-hidden="true"></i>
+                    </span>
+                </c-col>
+            </c-row>
+        </mat-card>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="margin-r15" color="info" cButton (click)="doChangePass()">
+        <svg cIcon name="cilSave"></svg>
+        Đổi mật khẩu
+    </button>
+    <button color="danger" cButton (click)="doClose()">
+        <svg cIcon name="cilX"></svg>
+        Đóng
+    </button>
+</div>

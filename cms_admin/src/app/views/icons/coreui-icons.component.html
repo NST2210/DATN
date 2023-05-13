@@ -1,0 +1,18 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left" [innerHTML]="title"></h4>
+</div>
+<div class="modal-body">
+    <c-row class="text-center">
+        <c-col *ngFor="let icon of icons"
+               class="{{iconCurrent && iconCurrent === icon[0] ? 'mb-5 text-link text-active' : 'mb-5 text-link'}}"
+               md="3" sm="4" xl="2" xs="6" (click)="doChoiceIcon(icon[0])">
+            <svg cIcon [name]="icon[0]" [title]="icon[0]" size="3xl"></svg>
+            <div>{{ toKebabCase(icon[0]) }}</div>
+        </c-col>
+    </c-row>
+</div>
+<div class="modal-footer">
+    <button color="danger" cButton (click)="close()">
+        <svg cIcon name="cilX"></svg>&nbsp;Đóng
+    </button>
+</div>

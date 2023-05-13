@@ -1,0 +1,110 @@
+<table mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="no">
+        <th
+            style="width: 10%"
+            class="text-center"
+            mat-header-cell
+            *matHeaderCellDef
+        >
+            STT
+        </th>
+        <td class="text-center" mat-cell *matCellDef="let item; let i = index">
+            {{ page * pageSize + (i + 1) }}
+        </td>
+    </ng-container>
+    <ng-container *ngIf="showRadio" matColumnDef="radioGroup">
+        <th
+            style="width: 5%"
+            class="text-center"
+            mat-header-cell
+            *matHeaderCellDef
+        ></th>
+        <td class="text-center" mat-cell *matCellDef="let item">
+            <mat-slide-toggle
+                *ngIf="item.visibility === true"
+                [(ngModel)]="item.checked"
+                (ngModelChange)="onChangeToggle(item, $event)"
+                [disabled]="item.checked === true"
+            ></mat-slide-toggle>
+        </td>
+    </ng-container>
+    <ng-container
+        *ngIf="tableAction && tableAction.length > 0"
+        matColumnDef="func"
+    >
+        <th
+            style="width: 20%"
+            class="text-center"
+            mat-header-cell
+            *matHeaderCellDef
+        >
+            Chức năng
+        </th>
+        <td class="text-center" mat-cell *matCellDef="let item">
+            <ul class="table-action">
+                <li
+                    class="text-link"
+                    *ngFor="let action of tableAction"
+                    matTooltip="{{ viewTooltipName(action, item) }}"
+                    (click)="doClickAction(action, item)"
+                >
+                    <svg
+                        *ngIf="action.iconType === 0"
+                        cIcon
+                        name="{{ viewIconName(action, item) }}"
+                    ></svg>
+                    <i
+                        *ngIf="action.iconType === 1"
+                        class="{{ viewIconName(action, item) }}"
+                    ></i>
+                </li>
+            </ul>
+        </td>
+    </ng-container>
+
+    <ng-container
+        [matColumnDef]="column.name"
+        *ngFor="let column of columnsView"
+    >
+        <th
+            [style.width]="
+                column.options && column.options.width
+                    ? column.options.width
+                    : 'auto'
+            "
+            class="text-center"
+            mat-header-cell
+            *matHeaderCellDef
+        >
+            {{ column.label }}
+        </th>
+        <td
+            mat-cell
+            [ngClass]="
+                column.options && column.options.align
+                    ? column.options.align
+                    : ''
+            "
+            *matCellDef="let item; let i = index"
+            [innerHtml]="renderValue(item, column, i)"
+        ></td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    <tr class="mat-row" *matNoDataRow>
+        <td
+            class="mat-cell text-center"
+            [attr.colspan]="displayedColumns.length"
+        >
+            Không có dữ liệu
+        </td>
+    </tr>
+</table>
+<mat-paginator
+    [length]="totalItems"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="[5, 10, 15, 20]"
+    (page)="onChangePage($event)"
+>
+</mat-paginator>

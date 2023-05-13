@@ -1,0 +1,55 @@
+<app-loading [loading]="loading"></app-loading>
+<c-row class="clear-margin-left clear-margin-right">
+    <div class="form-group text-right margin-t15">
+        <button active="normal" color="info" cButton (click)="doAddRow()">
+            <svg cIcon name="cilPlus"></svg>
+            Thêm liên kết
+        </button>
+    </div>
+    <c-col md="12" xl="12" xs="12">
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="text-center" style="width: 5%">STT</th>
+                <th class="text-center" style="width: 8%">Chức năng</th>
+                <th class="text-center">Tên hiển thị</th>
+                <th class="text-center">Link</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of listPortalLink; let i = index">
+                <td class="text-center">{{ i + 1 }}</td>
+                <td class="text-center">
+                    <ul class="table-action">
+                        <li matTooltip="Xoá" (click)="doRemoveRow(item, i)">
+                            <svg cIcon name="cilTrash"></svg>
+                        </li>
+                    </ul>
+                </td>
+                <td>
+                    <input
+                        type="text"
+                        class="form-control"
+                        [(ngModel)]="item.title"
+                        trim="blur"
+                        (ngModelChange)="onChangeTitle()"
+                    />
+                </td>
+
+                <td>
+                    <input
+                        type="text"
+                        trim="blur"
+                        class="form-control"
+                        [(ngModel)]="item.link"
+                        trim="blur"
+                    />
+                </td>
+            </tr>
+            <tr *ngIf="listPortalLink.length === 0">
+                <td class="text-center" colspan="4">Không bản ghi nào</td>
+            </tr>
+            </tbody>
+        </table>
+    </c-col>
+</c-row>

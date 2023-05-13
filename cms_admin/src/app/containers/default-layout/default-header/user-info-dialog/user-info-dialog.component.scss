@@ -1,0 +1,16 @@
+.modal-body {
+    .captcha-refresh {
+        float: left;
+        width: calc(20% - 1px);
+        background: #eb2226;
+        color: #fff;
+        text-align: center;
+        height: 40px;
+        vertical-align: inherit;
+        padding-top: 10px;
+        font-size: 20px;
+        border-left: #fff 1px solid;
+        border-radius: 0.375rem;
+    }
+}
+

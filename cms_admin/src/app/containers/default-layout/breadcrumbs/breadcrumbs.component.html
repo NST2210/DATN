@@ -1,0 +1,11 @@
+<div class="fade-in">
+    <c-row ngPreserveWhitespaces>
+        <c-breadcrumb class="mb-2">
+            <c-breadcrumb-item *ngFor="let item of items; index as i; last as isLast"
+                               [active]="isLast"
+                               [url]="item.url">
+                {{item.label}}
+            </c-breadcrumb-item>
+        </c-breadcrumb>
+    </c-row>
+</div>

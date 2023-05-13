@@ -1,0 +1,101 @@
+<app-loading [loading]="loading"></app-loading>
+<div class="modal-header">
+    <h4 class="modal-title pull-left" [innerHTML]="title"></h4>
+</div>
+<div class="modal-body">
+    <div class="preview-left">
+        <div class="zonebar titlebar clearfix">
+            <h1>
+                <a class="link">{{ articleDetail.groupName }}</a>
+            </h1>
+        </div>
+        <div class="storydetail clearfix">
+
+            <!-- Tên bài viết -->
+            <div class="story_head clearfix">
+                <span class="story_headline">{{
+                    articleDetail.articleTitle
+                    }}</span>
+            </div>
+
+            <!-- Thứ ,ngày ,tháng -->
+            <p class="news-detail-time mb-24">
+                <strong class="news-detail-time-lb">{{dateTimeUtils.displayDetailDate(articleDetail.articleCreateDate.toString())}}, {{
+                    articleDetail.articleCreateDate | date:'dd/MM/yyyy'}}</strong>
+            </p>
+          
+            <div class="story-links my-3 text-center d-block d-lg-none">
+                <a class="link story-link-item"><i class="fas fa-print"></i></a>
+                <share-social></share-social>
+            </div>
+
+            <!-- Mô tả tóm tắt bài viết -->
+            <div class="story_content clearfix" id="article-content-body">
+                <!-- <div class="story_teaser clearfix">
+                    {{ articleDetail.describe }}
+                </div> -->
+
+                <!-- Ảnh bài viết -->
+                <!-- <div class="story_avatar_b">
+                    <img style="max-width: 100%" src="{{
+                            'data:image/jpg;base64,' + articleDetail.imgDisplay
+                        }}" />
+                </div> -->
+
+                <!-- Mô tả ảnh bài viết -->
+                <!-- <div class="story_body" style="color: #0070c0; text-align: center" [innerHTML]="articleDetail.imgDesc">
+                </div> -->
+
+                <!-- Nội dung bài viết -->
+                <div class="story_body" [innerHTML]="contentReplace"></div>
+            </div>
+
+            <div>
+
+                <!-- Kiểm tra có từ khóa hay không -->
+                <div class="box-hashTag" *ngIf="lstKeyWord.length > 0">
+                    <i class="fa fa-tags" aria-hidden="true">&nbsp;</i>
+
+                    <!-- Từ khóa -->
+                    <div class="text-link-hashTag" *ngFor="let item of lstKeyWord">
+                        <a>{{ item }}</a>
+                    </div>
+
+                    <!-- Tác giả -->
+                    <div class="authors-info" style="text-align: right;margin-top: -25px;">{{
+                        articleDetail.authorsName
+                        }}</div>
+                    
+                    <!-- Thông tin tác giả     -->
+                    <div class="authors-info" style="text-align: right;">{{
+                        articleDetail.authorsInfo
+                        }}</div>
+                </div>
+
+                <!-- Nguồn bài viết -->
+                <div *ngIf="articleSource != null && articleSource != undefined">
+                    <span>Nguồn bài: <u><i><a href="{{ articleSource }}">{{ articleSource }}</a></i></u></span>
+                  </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button *ngIf="roleApproved" class="margin-r15" color="success" cButton (click)="doApproveOrReject(1)">
+        <svg cIcon name="cilCheckAlt"></svg>
+        Phê duyệt
+    </button>
+    <button *ngIf="roleApproved" class="margin-r15" color="info" cButton (click)="doApproveOrReject(0)">
+        <svg cIcon name="cilBan"></svg>
+        Từ chối
+    </button>
+    <button active="normal" color="success" cButton (click)="doPublish()" *ngIf="!isView">
+        <svg cIcon name="cilShareBoxed"></svg>
+        Xuất bản
+    </button>
+    <button class="margin-l5" color="danger" cButton (click)="doClose()">
+        <svg cIcon name="cilX"></svg>
+        Đóng
+    </button>
+</div>

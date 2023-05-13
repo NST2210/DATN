@@ -1,0 +1,433 @@
+@import "variables";
+@import "~@coreui/coreui/scss/coreui";
+@import "~@coreui/chartjs/scss/coreui-chartjs";
+// perfect scrollbar theming for use with [perfectScrollbar] directive
+//@import '~perfect-scrollbar/css/perfect-scrollbar.css';
+@import "layout";
+@import "fixes";
+@import "examples";
+@import "custom";
+
+$app-color-primary: #2e67b2;
+$app-color-warning: #df7630;
+$app-theme-primary: (
+    50: $app-color-primary,
+    100: $app-color-primary,
+    200: $app-color-primary,
+    300: $app-color-primary,
+    400: $app-color-primary,
+    500: $app-color-primary,
+    600: $app-color-primary,
+    700: $app-color-primary,
+    800: $app-color-primary,
+    900: $app-color-primary,
+    contrast: (
+        50: $app-color-primary,
+        100: $app-color-primary,
+        200: $app-color-primary,
+        300: $app-color-primary,
+        400: $app-color-primary,
+        500: $app-color-primary,
+        600: $app-color-primary,
+        700: $app-color-primary,
+        800: $app-color-primary,
+        900: $app-color-primary,
+    ),
+);
+$app-theme-warn: (
+    50: $app-color-warning,
+    100: $app-color-warning,
+    200: $app-color-warning,
+    300: $app-color-warning,
+    400: $app-color-warning,
+    500: $app-color-warning,
+    600: $app-color-warning,
+    700: $app-color-warning,
+    800: $app-color-warning,
+    900: $app-color-warning,
+    contrast: (
+        50: $app-color-warning,
+        100: $app-color-warning,
+        200: $app-color-warning,
+        300: $app-color-warning,
+        400: $app-color-warning,
+        500: $app-color-warning,
+        600: $app-color-warning,
+        700: $app-color-warning,
+        800: $app-color-warning,
+        900: $app-color-warning,
+    ),
+);
+$enable-ltr: true;
+$enable-rtl: true;
+$color-white: #ffffff;
+$color-info: #5cadff;
+
+// material
+@import "~@angular/material/theming";
+@include mat-core();
+$app-view-primary: mat-palette($app-theme-primary);
+$app-view-accent: mat-palette($mat-pink, A200, A100, A400);
+$app-view-warn: mat-palette($app-theme-warn);
+$app-view-theme: mat-light-theme(
+    (
+        color: (
+            primary: $app-view-primary,
+            accent: $app-view-accent,
+            warn: $app-view-warn,
+        ),
+    )
+);
+@include angular-material-theme($app-view-theme);
+
+@media (min-width: 768px) {
+    .sidebar.sidebar-fixed {
+        background: $app-color-primary;
+    }
+}
+html,
+body {
+    height: 100%;
+}
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.full-width {
+    width: 100%;
+}
+
+//==============================padding======================================
+.cler-padding-left {
+    padding-left: 0px !important;
+}
+.cler-padding-right {
+    padding-right: 0px !important;
+}
+//==============================end padding======================================
+
+//==============================margin======================================
+.clear-margin {
+    margin: 0px !important;
+}
+
+.clear-margin-left {
+    margin-left: 0px !important;
+}
+
+.clear-margin-right {
+    margin-right: 0px !important;
+}
+
+.margin-r15 {
+    margin-right: 15px;
+}
+
+.margin-l5 {
+    margin-left: 5px;
+}
+.margin-l10 {
+    margin-left: 10px;
+}
+.margin-r10 {
+    margin-right: 10px;
+}
+.margin-t15 {
+    margin-top: 15px;
+}
+.margin-bt15 {
+    margin-bottom: 15px;
+}
+.margin-bt0 {
+    margin-bottom: 0px !important;
+}
+//==============================end margin======================================
+//==============================Card======================================
+.card-header-custom {
+    border-bottom: #ccc 1px solid;
+    margin-bottom: 20px;
+}
+.mat-card-custom {
+    margin-top: 15px;
+}
+
+.mat-card-header-text {
+    margin: 0px !important;
+}
+
+.mat-card-title {
+    font-size: 16px !important;
+}
+.card-action {
+    position: absolute !important;
+    right: 0px;
+    top: 5px;
+}
+//==============================end card======================================
+//==============================Table======================================
+table {
+    width: 100%;
+    border-spacing: 0 8px !important;
+}
+
+.mat-header-cell {
+    color: $app-color-primary;
+    text-align: center;
+    // font-weight: 600;
+    font-size: 14px;
+}
+
+td.mat-cell {
+    padding: 5px !important;
+}
+
+.table-action {
+    margin: 0px !important;
+    padding: 0px;
+    li {
+        display: inline-block;
+        padding: 5px;
+        color: $color-info;
+    }
+
+    :hover {
+        cursor: pointer !important;
+    }
+
+    .active {
+        color: $color-white !important;
+    }
+
+    .active:hover {
+        color: #e55353 !important;
+    }
+}
+.row-active {
+    background: #5cadff !important;
+    color: #fff !important;
+}
+//==============================end table======================================
+//==============================Text======================================
+.text-right {
+    text-align: right;
+}
+.text-required {
+    color: red !important;
+}
+.text-link:hover {
+    cursor: pointer;
+    color: $app-color-primary;
+}
+.text-active {
+    color: $app-color-primary;
+}
+//==============================End text======================================
+//==============================Button======================================
+.btn {
+    color: $color-white !important;
+}
+//==============================End button======================================
+//==============================Model====================================
+.modal-dialog {
+    max-width: 90%;
+    width: 90%;
+}
+
+.mat-dialog-container {
+    padding: 0px !important;
+}
+.modal-header {
+    background-color: $color-info;
+    color: $color-white;
+    padding: 15px;
+}
+.modal-footer {
+    padding: 15px;
+    border-top: #ccc 1px solid;
+}
+.modal {
+    display: block !important;
+    /* I added this to see the modal, you don't need this */
+}
+
+.modal-dialog {
+    overflow-y: initial !important;
+}
+
+.modal-body {
+    max-height: 70vh;
+    overflow-y: auto;
+    padding: 15px;
+}
+
+.modal-title {
+    margin-bottom: 0px !important;
+}
+//==============================End model====================================
+//==============================View status====================================
+.status-approved {
+    float: left;
+    width: 100%;
+    background: #39f;
+    padding: 5px;
+    color: #fff;
+    border-radius: 5px;
+    min-width: 88px;
+    text-align: center;
+    min-height: 30px;
+}
+.status-draf {
+    float: left;
+    width: 100%;
+    background: #f0ad4e;
+    padding: 5px;
+    color: #fff;
+    border-radius: 5px;
+    min-width: 88px;
+    text-align: center;
+    min-height: 30px;
+}
+.status-wait {
+    float: left;
+    width: 100%;
+    background: #5bc0de;
+    padding: 5px;
+    color: #fff;
+    border-radius: 5px;
+    min-width: 88px;
+    text-align: center;
+    min-height: 30px;
+}
+.status-success {
+    float: left;
+    width: 100%;
+    background: #5cb85c;
+    padding: 5px;
+    color: #fff;
+    border-radius: 5px;
+    min-width: 88px;
+    text-align: center;
+    min-height: 30px;
+}
+
+.status-error {
+    float: left;
+    width: 100%;
+    background: #eb2226;
+    padding: 5px;
+    color: #fff;
+    border-radius: 5px;
+    min-width: 88px;
+    text-align: center;
+    min-height: 30px;
+}
+//==============================End view status====================================
+//==============================Model zindex befor sidebar====================================
+@media (min-width: 768px) {
+    .sidebar.sidebar-fixed {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        z-index: 11;
+    }
+}
+
+.header.header-sticky {
+    z-index: 10;
+}
+//==============================End model zindex befor sidebar====================================
+
+.sidebar-brand {
+    background-color: #fff !important;
+}
+
+//================CUSTOME CLEDITTOR=================
+.ck-editor__editable_inline {
+    min-height: 150px !important;
+}
+.ckeditor-custome {
+    // float: left !important;
+    width: 100% !important;
+    overflow: hidden !important;
+}
+.ck-rounded-corners {
+    border: #ccc 1px solid !important;
+}
+
+//other
+.lang-icon {
+    height: 40px;
+    width: 60px;
+    border-radius: 2px;
+    flex-shrink: 0;
+    object-fit: cover;
+}
+.logo-icon {
+    height: 40px;
+    width: 40px;
+    border-radius: 500%;
+    flex-shrink: 0;
+    object-fit: cover;
+}
+.image-display{
+    height: 60px;
+    width: 120px;
+    flex-shrink: 0;
+    object-fit: cover;
+}
+
+//================CUSTOME IMAGE PRIVEW=================
+.img-upload-privew {
+    float: left;
+    width: 100%;
+    margin: 0px;
+    padding: 0px 0px 0px 20px;
+
+    li {
+        display: inline-block;
+        margin: 0px;
+        padding: 10px 0px;
+
+        :hover {
+            cursor: pointer !important;
+        }
+    }
+}
+
+//================END CUSTOME IMAGE PRIVEW=================
+
+//================WIDTH=================
+.w5 {
+    width: 5%;
+}
+.w10 {
+    width: 10%;
+}
+.w15 {
+    width: 15%;
+}
+//================END WIDTH=================
+
+/* Khanhnd insert */
+.resize-text {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical
+}
+/* Khanhnd end */
+
+//================DATEPICKER=================
+.mat-datepicker-toggle{
+    position: absolute;
+    right: 0;
+    top: -10px;
+}
+// .mat-calendar-body-today .mat-calendar-body-selected{
+//     box-shadow: none !important;
+// }
+
+.mat-calendar-body-selected{
+    color: #fff !important;
+}

@@ -1,0 +1,84 @@
+<app-loading [loading]="loading"></app-loading>
+<div class="modal-header">
+    <h4 class="modal-title pull-left" [innerHTML]="title"></h4>
+</div>
+<div class="modal-body">
+    <form [formGroup]="articleForm" novalidate>
+        <c-row class="margin-t15">
+            <c-col md="4" xl="4" xs="12">
+                <mat-form-field class="full-width">
+                    <mat-label>Ngôn ngữ</mat-label>
+                    <mat-select formControlName="langCode">
+                        <mat-option *ngFor="let obj of lstLangByPortal" [value]="obj.langCode">
+                            {{ obj.langName }}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error> Vui lòng nhập thông tin</mat-error>
+                </mat-form-field>
+            </c-col>
+        </c-row>
+        <c-row class="margin-t15">
+            <c-col md="4" xl="4" xs="12">
+                <mat-form-field class="full-width">
+                    <mat-label>Mô tả ngắn</mat-label>
+                    <textarea matInput rows="5" formControlName="describe"></textarea>
+                    <mat-error> Vui lòng nhập thông tin</mat-error>
+                </mat-form-field>
+            </c-col>
+            <!-- <c-col md="4" xl="4" xs="12">
+                <mat-form-field class="full-width">
+                    <mat-label>Tiêu đề</mat-label>
+                    <input matInput formControlName="articleTitle" />
+                    <mat-error> Vui lòng nhập thông tin </mat-error>
+                </mat-form-field>
+            </c-col> -->
+            <c-col md="4" xl="4" xs="12">
+                <!-- <button cButton color="success" (click)="fileWordImport.click()">
+                    <i class="fa fa-file-word-o"></i>&nbsp;Tải video lên
+                </button>
+                <input type="file" #fileField (change)="changeFile($any($event).target.files)" hidden
+                    accept="image/*" />
+                <input type="file" #fileWordImport (change)="changeFileImport($any($event).target.files)" hidden
+                    accept=".doc, .docx, application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+
+                <ul class="img-upload-privew" *ngIf="imgDisplay">
+                    <li>
+                        <mat-chip-list>
+                            <mat-chip (click)="doPreview()">
+                                <img matChipAvatar src="{{
+                                        'data:image/jpg;base64,' + imgDisplay
+                                    }}" />
+                                {{ imgDisplayName }}
+                                <button matChipRemove>
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </mat-chip>
+                        </mat-chip-list>
+                    </li>
+                </ul> -->
+                <p>
+                    Tải video lên:
+                </p>
+
+                <!-- <img [src]="url" *ngIf="format==='image' && url" height="200"> <br/> -->
+                <video [src]="url" *ngIf="format==='video' && url" height="200" controls></video>
+                <br/>
+                <input type='file' (change)="onSelectFile($event)"/>
+            </c-col>
+        </c-row>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="margin-r15" color="success" cButton (click)="doSave(0)">
+        <svg cIcon name="cilSave"></svg>
+        Lưu
+    </button>
+    <!-- <button class="margin-r15" color="info" cButton (click)="doSave(1)">
+        <svg cIcon name="cilSend"></svg>
+        Lưu & gửi duyệt
+    </button>
+    <button color="danger" cButton (click)="doClose()">
+        <svg cIcon name="cilX"></svg>
+        Đóng
+    </button> -->
+</div>

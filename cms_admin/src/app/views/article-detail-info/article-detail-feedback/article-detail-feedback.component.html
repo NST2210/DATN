@@ -1,0 +1,29 @@
+<app-loading [loading]="loading"></app-loading>
+<div class="modal-header">
+    <h4 class="modal-title pull-left" [innerHTML]="title"></h4>
+</div>
+<div class="modal-body">
+    <div *ngIf="isView === false">
+        <h3 style="text-align: center;">Không có dữ liệu</h3>
+    </div>
+    <div class="zonebar titlebar clearfix" *ngFor="let item of listArticleFeedback">
+        <h3 style="margin-bottom:0% !important"><span class="icon fa fa-rocket"></span>
+            <span class="username-feedback">{{ item.name }}</span>: {{item.email }}
+        </h3>
+        <div class="story-tools mb-1 clearfix">
+            <div class="story_date pt-lg-2" style="padding-top: 0rem !important;">
+                {{ helper.formatDateView(item.createdDate) }}
+            </div>
+        </div>
+
+        <div class="story_head clearfix">
+            <textarea class="story_headline" style="width:831.4px ;" [disabled]="true">{{ item.content }}</textarea>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="margin-l5" color="danger" cButton (click)="doClose()">
+        <svg cIcon name="cilX"></svg>
+        Đóng
+    </button>
+</div>

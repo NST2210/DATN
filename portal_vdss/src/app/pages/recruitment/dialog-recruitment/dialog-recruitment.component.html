@@ -1,0 +1,82 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">{{lang.parseTextCommon("application_information")}}</h4>
+</div>
+<form [formGroup]="feedbackForm" novalidate>
+  <mat-card>
+    <mat-card-content>
+      <div class="row mb-20">
+        <div class="col-md-6">
+          <input type="text" maxlength="100" trim="blur" class="form-control is-invalid" formControlName="name"
+            placeholder="{{lang.parseTextCommon('your_name')}}"
+            [ngClass]="{'is-invalid':isSubmitted && feedbackForm.controls['name'].errors}" />
+          <div class="invalid-feedback d-block-start" *ngIf="feedbackForm.controls['name'].errors?.['required']">
+            {{lang.parseTextCommon("validate1")}}
+          </div>
+          <div class="invalid-feedback d-block-start" *ngIf="feedbackForm.controls['name'].errors?.['maxlength']">
+            {{lang.parseTextCommon("validate2")}}
+          </div>
+          <div class="invalid-feedback d-block-start" *ngIf="feedbackForm.controls['name'].errors?.['pattern']">
+            {{lang.parseTextCommon("validat7")}}
+          </div>
+          <br>
+        </div>
+        <br>
+        <div class="col-md-6">
+          <input type="text" class="form-control is-invalid" placeholder="{{lang.parseTextCommon('phone')}}"
+            formControlName="mobilePhone"
+            [ngClass]="{'is-invalid':isSubmitted && feedbackForm.controls['mobilePhone'].errors}" />
+          <div class="invalid-feedback d-block-start" *ngIf="feedbackForm.controls['mobilePhone'].errors?.['required']">
+            {{lang.parseTextCommon("validate1")}}
+          </div>
+          <div class="invalid-feedback d-block-start"
+            *ngIf="feedbackForm.controls['mobilePhone'].errors?.['maxlength']">
+            {{lang.parseTextCommon("validate4")}}
+          </div>
+          <div class="invalid-feedback d-block-start" *ngIf="feedbackForm.controls['mobilePhone'].errors?.['pattern']">
+            {{lang.parseTextCommon("validate3")}}
+          </div>
+          <br>
+        </div>
+        <br>
+        <div class="col-md-6">
+          <input placeholder="{{lang.parseTextCommon('email')}}" type="text" maxlength="100"
+            class="form-control is-invalid" formControlName="email"
+            [ngClass]="{'is-invalid':isSubmitted && feedbackForm.controls['email'].errors}" />
+          <div class="invalid-feedback d-block-start" *ngIf="feedbackForm.controls['email'].errors?.['required']">
+            {{lang.parseTextCommon("validate1")}}
+          </div>
+          <div class="invalid-feedback d-block-start" *ngIf="feedbackForm.controls['email'].errors?.['pattern']">
+            {{lang.parseTextCommon("validate5")}}
+          </div>
+          <div class="invalid-feedback d-block-start" *ngIf="feedbackForm.controls['email'].errors?.['maxlength']">
+            {{lang.parseTextCommon("validate2")}}
+          </div>
+          <br>
+        </div>
+      </div>
+      <input type="file" style="display: none" type="file" (change)="handleUpload($event)" #hiddenfileinput
+        accept=".pdf,.docx,.doc">
+      <div style="display: flex;">
+        <button (click)="hiddenfileinput.click()" class="btn btn-sent margin-r15 mr-10"><i
+            class="fas fa-light fa-upload"></i> Upload CV</button>
+        <div *ngIf="fileName" class="file-upload" data-toggle="tooltip" data-placement="top" title="{{fileName}}">
+          {{ (fileName).length > 30
+          ? (fileName | slice : 0 : 30) +
+          "..."
+          : fileName }}
+          <span *ngIf="fileName">
+            <i class="fas fa-times remove-icon" (click)="removeFile()"></i>
+          </span>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</form>
+<div class="modal-footer">
+  <button type="button" class="btn btn-sent margin-r15 mr-10" (click)="doFeedback()">
+    <i class="fas fa-light fa-paper-plane">&nbsp;</i>{{lang.parseTextCommon("send")}}
+  </button>
+  <button type="button" class="btn btn-danger" (click)="doClose()">
+    <i class="fa fa-times" aria-hidden="true"></i>&nbsp;{{lang.parseTextCommon("close")}}
+  </button>
+</div>

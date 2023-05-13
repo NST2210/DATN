@@ -1,0 +1,132 @@
+<app-loading [loading]="loading"></app-loading>
+<div class="modal-header">
+    <h4 class="modal-title pull-left" [innerHTML]="title"></h4>
+</div>
+<div class="modal-body">
+    <c-row class="clear-margin-left clear-margin-right">
+        <c-col md="6" xl="6" xs="12">
+            <mat-card class="card-custom">
+                <mat-card-header class="card-header-custom">
+                    <mat-card-title>
+                        Ngôn ngữ&nbsp;&nbsp;
+                        <button active="normal" color="success" cButton class="margin-r15" (click)="doSaveLang()">
+                            <svg cIcon name="cilSave"></svg>
+                            Lưu ngôn ngữ
+                        </button>
+                        <button active="normal" color="info" cButton (click)="doNewLang()">
+                            <svg cIcon name="cilPlus"></svg>
+                            Thêm ngôn ngữ
+                        </button>
+                    </mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="text-center" style="width: 10%">
+                                    STT
+                                </th>
+                                <th class="text-center" style="width: 20%">
+                                    Chức năng
+                                </th>
+                                <th class="text-center">Ngôn ngữ</th>
+                                <th class="text-center" style="width: 25%">
+                                    Hiển thị mặc định
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of dataLangList; let i = index" [ngClass]="
+                                    item.choiceActive === true
+                                        ? 'row-active'
+                                        : ''
+                                ">
+                                <td class="text-center">{{ i + 1 }}</td>
+                                <td class="text-center">
+                                    <ul class="table-action">
+                                        <li matTooltip="Thông tin chi tiết" (click)="doEditDetailByLang(item)"
+                                            [ngClass]="
+                                                item.choiceActive === true
+                                                    ? 'text-link active'
+                                                    : 'text-link'
+                                            ">
+                                            <svg cIcon name="cilColorBorder"></svg>
+                                        </li>
+                                        <li matTooltip="Xoá" [ngClass]="
+                                                item.choiceActive === true
+                                                    ? 'text-link active'
+                                                    : 'text-link'
+                                            " (click)="doRemoveRowLang(item, i)">
+                                            <svg cIcon name="cilTrash"></svg>
+                                        </li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <select class="form-select" [(ngModel)]="item.langCode" (ngModelChange)="
+                                            onChangeLanguage(item, $event, i)
+                                        ">
+                                        <option [value]="-1">
+                                            ---Chọn ngôn ngữ---
+                                        </option>
+                                        <option *ngFor="let obj of langs" [value]="obj.code">
+                                            {{ obj.name }}
+                                        </option>
+                                    </select>
+                                </td>
+                                <td class="text-center">
+                                    <mat-slide-toggle [(ngModel)]="item.isDefault" (ngModelChange)="
+                                            onChangeLangDefault(item, $event)
+                                        " [disabled]="item.isDefault === 1"></mat-slide-toggle>
+                                </td>
+                            </tr>
+                            <tr *ngIf="dataLangList.length === 0">
+                                <td colspan="4">Không có bản ghi</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </mat-card-content>
+            </mat-card>
+        </c-col>
+        <c-col md="6" xl="6" xs="12">
+            <mat-card class="card-custom">
+                <mat-card-header class="card-header-custom">
+                    <mat-card-title>
+                        Thông tin chung
+                        {{
+                        langChoice.langCode
+                        ? "(" + langChoice.langName + ")"
+                        : "(Ngôn ngữ không xác định)"
+                        }}&nbsp;&nbsp;
+                        <button active="normal" color="success" cButton (click)="doSavePortalUtilInfo()"
+                            *ngIf="langChoice.langCode">
+                            <svg cIcon name="cilSave"></svg>
+                            Lưu thông tin
+                        </button>
+                    </mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <mat-tab-group animationDuration="500ms" [selectedIndex]="tabSelected"
+                        (selectedIndexChange)="tabSelected = $event" *ngIf="langChoice.langCode">
+                        <mat-tab label="Footer">
+                            <portal-footer [portalInfo]="portalInfo" [langItem]="langChoice"
+                                [footerDetail]="footerDetail">
+                            </portal-footer>
+                        </mat-tab>
+                        <mat-tab label="Liên kết">
+                            <portal-link [portalInfo]="portalInfo" [userInfo]="userInfo" [langItem]="langChoice"
+                                [listPortalLink]="listPortalLink">
+                            </portal-link>
+                        </mat-tab>
+                    </mat-tab-group>
+                    <span *ngIf="!langChoice.langCode">Chưa chọn bản ghi ngôn ngữ</span>
+                </mat-card-content>
+            </mat-card>
+        </c-col>
+    </c-row>
+</div>
+<div class="modal-footer">
+    <button color="danger" cButton (click)="doClose()">
+        <svg cIcon name="cilX"></svg>
+        Đóng
+    </button>
+</div>

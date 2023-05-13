@@ -1,0 +1,37 @@
+<div class="Steps">
+
+    <ul>
+        <li *ngFor="let item of fowStep;let i=index" [ngClass]="appendClassParent(item)">
+            <div [ngClass]="appendClass(item)">
+                <i class="icon-valid" *ngIf="item.status"></i>
+                <span class="txt-process" *ngIf="!item.status">{{i+1}}</span>
+                <span [ngClass]="appendClassDesc(item)">{{item.userName}}</span>
+            </div>
+        </li>
+    </ul>
+
+    <!-- <ul>
+        <li>
+            <div class="step done" data-desc="Welcome">
+                <i class="icon-valid"></i>
+            </div>
+        </li>
+        <li>
+            <div class="step done" data-desc="Terms of use">
+                <i class="icon-valid"></i>
+            </div>
+        </li>
+        <li class="pulse">
+            <div class="step active" data-desc="Register">3</div>
+        </li>
+        <li>
+            <div class="step" data-desc="Validation">4</div>
+        </li>
+        <li>
+            <div class="step" data-desc="Payment">5</div>
+        </li>
+        <li>
+            <div class="step" data-desc="Resume">6</div>
+        </li>
+    </ul> -->
+</div>

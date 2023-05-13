@@ -1,0 +1,72 @@
+<app-loading [loading]="loading"></app-loading>
+<div class="modal-header">
+    <h4 class="modal-title pull-left" [innerHTML]="title"></h4>
+</div>
+<div class="modal-body">
+    <form *ngIf="isView">
+        <div class="file-upload" dragDropFileUpload (click)="fileField.click()" (fileDropped)="changeFile($event)">
+            <span class="icon-upload"><i class="fa fa-cloud-upload" aria-hidden="true"></i></span>
+            <span class="info-upload">Nhấp chuột vào hoặc kéo thả ảnh vào đây để tải lên.</span><br>
+            <span class="extention-upload">Hỗ trợ các loại tệp tin: .png,.jpg,.jpeg,.gif,.pdf,.psd,.jfif</span>
+            <input type="file" #fileField (change)="changeFile($any($event).target.files)"
+                accept=".png,.jpg,.jpeg,.gif,.pdf,.psd,.jfif" hidden multiple />
+        </div>
+    </form>
+
+    <c-row class="margin-t15 margin-l10">
+        <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2"
+            *ngIf="lstImgUpload && lstImgUpload.length > 0">
+            <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3" *ngFor="let item of lstImgUpload; index as i">
+                <li class="MuiGridListTile-root" style="list-style-type: none;">
+                    <div class="MuiGridListTile-tile">
+                        <mat-radio-button (change)="radioChange(item)" [checked]="item.imgIllustration === 1"
+                            [value]="item.imgIllustration" class="radio-button"></mat-radio-button>
+                        <img (click)="doPreview(item)" class="MuiGridListTile-imgFullHeight"
+                            style="max-height: 300px; height: 300px; min-height: 300px;"
+                            src="{{'data:image/jpg;base64,' + item.imgDisplay }}" alt />
+                        <div
+                            class="MuiGridListTileBar-root MuiGridListTileBar-titlePositionBottom MuiGridListTileBar-rootSubtitle">
+                            <div class="MuiGridListTileBar-titleWrap MuiGridListTileBar-titleWrapActionPosRight">
+                                <div class="MuiGridListTileBar-title">{{item.imgDisplayName}}</div>
+                            </div>
+                            <div class="MuiGridListTileBar-actionIcon">
+                                <button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorSecondary"
+                                    (click)="onDelete(item.imgDisplayName, i)" #tooltip="matTooltip"
+                                    matTooltip="Xóa hình ảnh">
+                                    <span class="MuiIconButton-label">
+                                        <svg cIcon name="cilTrash"></svg>
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <div class="MuiInputBase-root MuiOutlinedInput-root valinvalidrequire MuiInputBase-fullWidth">
+                    <div
+                        class="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input">
+                        <form class="form-input">
+                            <mat-form-field class="full-width" style="margin-top: 10px">
+                                <mat-label>Mô tả ảnh hiển thị</mat-label>
+                                <input trim="blur" matInput placeholder="Nhập mô tả...." [(ngModel)]="item.imgDesc"
+                                    [ngModelOptions]="{standalone: true}" />
+                            </mat-form-field>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </c-row>
+</div>
+<div class="modal-footer">
+    <button color="info" cButton (click)="doUpload('save')" *ngIf="!isView">
+        <svg cIcon name="cilSave"></svg>
+        Lưu
+    </button>
+    <button active="normal" class="ml-5" color="success" cButton (click)="doUpload('upload')"
+        *ngIf="lstImgUpload && lstImgUpload.length > 0 && isView">
+        <i class="fa fa-upload" aria-hidden="true"></i>&nbsp;Tải lên
+    </button>
+    <button active="normal" color="danger" class="ml-5" cButton (click)="close()">
+        <i class="fa fa-times" aria-hidden="true"></i>&nbsp;Đóng
+    </button>
+</div>

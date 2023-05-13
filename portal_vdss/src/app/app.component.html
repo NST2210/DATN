@@ -1,0 +1,5 @@
+<app-header [menus]="menus"></app-header>
+
+<router-outlet *ngIf="isInitialized"></router-outlet>
+
+<app-footer [menus]="menus" [data]="contentReplace"></app-footer>

@@ -1,0 +1,78 @@
+<app-loading [loading]="loading"></app-loading>
+<div class="modal-header">
+    <h4 class="modal-title pull-left" [innerHTML]="title"></h4>
+</div>
+<div class="modal-body">
+    <mat-card style="border: #ccc 1px solid; box-shadow: none !important">
+        <mat-card-content>
+            <c-row>
+                <c-col md="4" xl="4" xs="12">
+                    <mat-form-field class="full-width">
+                        <mat-label>Tên portal</mat-label>
+                        <input matInput [(ngModel)]="portalName" disabled />
+                    </mat-form-field>
+                </c-col>
+                <c-col md="4" xl="4" xs="12">
+                    <mat-form-field class="full-width">
+                        <mat-label>Ngôn ngữ</mat-label>
+                        <mat-select class="full-width" [(ngModel)]="langCode">
+                            <mat-option *ngFor="let obj of lstLangByPortal" [value]="obj.langCode">
+                                {{ obj.langName }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </c-col>
+                <c-col md="4" xl="4" xs="12">
+                    <mat-form-field class="full-width">
+                        <mat-label>Ảnh quảng cáo/ banner</mat-label>
+                        <mat-select [(ngModel)]="fileType">
+                            <mat-option *ngFor="let obj of lstBanner" [value]="obj.value">
+                                {{ obj.name }}
+                            </mat-option>
+                        </mat-select>
+
+                    </mat-form-field>
+                </c-col>
+            </c-row>
+            <c-row>
+                <c-col md="12" xl="12" xs="12" *ngIf="formType !== 'detail'">
+                    <button cButton color="info" (click)="fileField.click()">
+                        <i class="fa fa-picture-o"></i>&nbsp;Upload
+                    </button>
+                    <input type="file" #fileField (change)="changeFile($event)" hidden accept="image/*" multiple />
+                </c-col>
+            </c-row>
+            <c-row>
+                <c-col md="12" xl="12" xs="12">
+                    <ul class="img-upload-privew">
+                        <li>
+                            <mat-chip-list *ngFor="let item of listImage; index as i">
+                                <mat-chip (click)="doPreview(item)" matTooltip="{{ item.name }}">
+                                    <img matChipAvatar
+                                        src="{{ 'data:image/jpg;base64,' + (item.imgData ? item.imgData : '')}}" />
+                                    {{ (item.name).length > 30
+                                    ? (item.name | slice : 0 : 30) +
+                                    "..."
+                                    : item.name }}
+                                    <button matChipRemove (click)="removeFile(i)">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </mat-chip>
+                            </mat-chip-list>
+                        </li>
+                    </ul>
+                </c-col>
+            </c-row>
+        </mat-card-content>
+    </mat-card>
+</div>
+<div class="modal-footer">
+    <button class="margin-r15" color="info" cButton (click)="doSave()" *ngIf="formType !== 'detail'">
+        <svg cIcon name="cilSave"></svg>
+        Lưu
+    </button>
+    <button color="danger" cButton (click)="doClose()">
+        <svg cIcon name="cilX"></svg>
+        Đóng
+    </button>
+</div>

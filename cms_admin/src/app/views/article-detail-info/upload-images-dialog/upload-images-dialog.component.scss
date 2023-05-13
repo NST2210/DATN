@@ -1,0 +1,781 @@
+$color-primary-app: #5cadff;
+
+.file-upload {
+    border: 2px dashed $color-primary-app;
+    border-radius: 20px;
+    padding: 30px;
+    cursor: pointer;
+    text-align: center;
+
+    .icon-upload {
+        float: left;
+        width: 100%;
+        font-size: 60px;
+        color: $color-primary-app;
+    }
+}
+
+.file-preview {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.ml-5 {
+    margin-left: 5px;
+}
+
+//Upload hình ảnh
+
+.MuiGrid-container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+}
+
+.MuiGrid-item {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.MuiGrid-zeroMinWidth {
+    min-width: 0;
+}
+
+.MuiGrid-direction-xs-column {
+    flex-direction: column;
+}
+
+.MuiGrid-direction-xs-column-reverse {
+    flex-direction: column-reverse;
+}
+
+.MuiGrid-direction-xs-row-reverse {
+    flex-direction: row-reverse;
+}
+
+.MuiGrid-wrap-xs-nowrap {
+    flex-wrap: nowrap;
+}
+
+.MuiGrid-wrap-xs-wrap-reverse {
+    flex-wrap: wrap-reverse;
+}
+
+.MuiGrid-align-items-xs-center {
+    align-items: center;
+}
+
+.MuiGrid-align-items-xs-flex-start {
+    align-items: flex-start;
+}
+
+.MuiGrid-align-items-xs-flex-end {
+    align-items: flex-end;
+}
+
+.MuiGrid-align-items-xs-baseline {
+    align-items: baseline;
+}
+
+.MuiGrid-align-content-xs-center {
+    align-content: center;
+}
+
+.MuiGrid-align-content-xs-flex-start {
+    align-content: flex-start;
+}
+
+.MuiGrid-align-content-xs-flex-end {
+    align-content: flex-end;
+}
+
+.MuiGrid-align-content-xs-space-between {
+    align-content: space-between;
+}
+
+.MuiGrid-align-content-xs-space-around {
+    align-content: space-around;
+}
+
+.MuiGrid-justify-xs-center {
+    justify-content: center;
+}
+
+.MuiGrid-justify-xs-flex-end {
+    justify-content: flex-end;
+}
+
+.MuiGrid-justify-xs-space-between {
+    justify-content: space-between;
+}
+
+.MuiGrid-justify-xs-space-around {
+    justify-content: space-around;
+}
+
+.MuiGrid-justify-xs-space-evenly {
+    justify-content: space-evenly;
+}
+
+.MuiGrid-spacing-xs-1 {
+    width: calc(100% + 8px);
+    margin: -4px;
+}
+
+.MuiGrid-spacing-xs-1 > .MuiGrid-item {
+    padding: 4px;
+}
+
+.MuiGrid-spacing-xs-2 {
+    width: calc(100% + 16px);
+    margin: -8px;
+}
+
+.MuiGrid-spacing-xs-2 > .MuiGrid-item {
+    padding: 8px;
+}
+
+.MuiGrid-spacing-xs-3 {
+    width: calc(100% + 24px);
+    margin: -12px;
+}
+
+.MuiGrid-spacing-xs-3 > .MuiGrid-item {
+    padding: 12px;
+}
+
+.MuiGrid-spacing-xs-4 {
+    width: calc(100% + 32px);
+    margin: -16px;
+}
+
+.MuiGrid-spacing-xs-4 > .MuiGrid-item {
+    padding: 16px;
+}
+
+.MuiGrid-spacing-xs-5 {
+    width: calc(100% + 40px);
+    margin: -20px;
+}
+
+.MuiGrid-spacing-xs-5 > .MuiGrid-item {
+    padding: 20px;
+}
+
+.MuiGrid-spacing-xs-6 {
+    width: calc(100% + 48px);
+    margin: -24px;
+}
+
+.MuiGrid-spacing-xs-6 > .MuiGrid-item {
+    padding: 24px;
+}
+
+.MuiGrid-spacing-xs-7 {
+    width: calc(100% + 56px);
+    margin: -28px;
+}
+
+.MuiGrid-spacing-xs-7 > .MuiGrid-item {
+    padding: 28px;
+}
+
+.MuiGrid-spacing-xs-8 {
+    width: calc(100% + 64px);
+    margin: -32px;
+}
+
+.MuiGrid-spacing-xs-8 > .MuiGrid-item {
+    padding: 32px;
+}
+
+.MuiGrid-spacing-xs-9 {
+    width: calc(100% + 72px);
+    margin: -36px;
+}
+
+.MuiGrid-spacing-xs-9 > .MuiGrid-item {
+    padding: 36px;
+}
+
+.MuiGrid-spacing-xs-10 {
+    width: calc(100% + 80px);
+    margin: -40px;
+}
+
+.MuiGrid-spacing-xs-10 > .MuiGrid-item {
+    padding: 40px;
+}
+
+.MuiGrid-grid-xs-auto {
+    flex-grow: 0;
+    max-width: none;
+    flex-basis: auto;
+}
+
+.MuiGrid-grid-xs-true {
+    flex-grow: 1;
+    max-width: 100%;
+    flex-basis: 0;
+}
+
+.MuiGrid-grid-xs-1 {
+    flex-grow: 0;
+    max-width: 8.333333%;
+    flex-basis: 8.333333%;
+}
+
+.MuiGrid-grid-xs-2 {
+    flex-grow: 0;
+    max-width: 16.666667%;
+    flex-basis: 16.666667%;
+}
+
+.MuiGrid-grid-xs-3 {
+    flex-grow: 0;
+    max-width: 25%;
+    flex-basis: 25%;
+}
+
+.MuiGrid-grid-xs-4 {
+    flex-grow: 0;
+    max-width: 33.333333%;
+    flex-basis: 33.333333%;
+}
+
+.MuiGrid-grid-xs-5 {
+    flex-grow: 0;
+    max-width: 41.666667%;
+    flex-basis: 41.666667%;
+}
+
+.MuiGrid-grid-xs-6 {
+    flex-grow: 0;
+    max-width: 50%;
+    flex-basis: 50%;
+}
+
+.MuiGrid-grid-xs-7 {
+    flex-grow: 0;
+    max-width: 58.333333%;
+    flex-basis: 58.333333%;
+}
+
+.MuiGrid-grid-xs-8 {
+    flex-grow: 0;
+    max-width: 66.666667%;
+    flex-basis: 66.666667%;
+}
+
+.MuiGrid-grid-xs-9 {
+    flex-grow: 0;
+    max-width: 75%;
+    flex-basis: 75%;
+}
+
+.MuiGrid-grid-xs-10 {
+    flex-grow: 0;
+    max-width: 83.333333%;
+    flex-basis: 83.333333%;
+}
+
+.MuiGrid-grid-xs-11 {
+    flex-grow: 0;
+    max-width: 91.666667%;
+    flex-basis: 91.666667%;
+}
+
+.MuiGrid-grid-xs-12 {
+    flex-grow: 0;
+    max-width: 100%;
+    flex-basis: 100%;
+}
+
+.MuiGridListTile-root {
+    box-sizing: border-box;
+    flex-shrink: 0;
+}
+
+.MuiGridListTile-tile {
+    height: 100%;
+    display: block;
+    overflow: hidden;
+    position: relative;
+}
+
+.MuiGridListTile-imgFullHeight {
+    left: 50%;
+    height: 100%;
+    position: relative;
+    transform: translateX(-50%);
+}
+
+.MuiGridListTile-imgFullWidth {
+    top: 50%;
+    width: 100%;
+    position: relative;
+    transform: translateY(-50%);
+}
+
+.MuiGridListTileBar-root {
+    left: 0;
+    right: 0;
+    height: 48px;
+    display: flex;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+}
+
+.MuiGridListTileBar-titlePositionBottom {
+    bottom: 0;
+}
+
+.MuiGridListTileBar-titlePositionTop {
+    top: 0;
+}
+
+.MuiGridListTileBar-rootSubtitle {
+    height: 68px;
+}
+
+.MuiGridListTileBar-titleWrap {
+    color: #fff;
+    overflow: hidden;
+    flex-grow: 1;
+    margin-left: 16px;
+    margin-right: 16px;
+}
+
+.MuiGridListTileBar-titleWrapActionPosLeft {
+    margin-left: 0;
+}
+
+.MuiGridListTileBar-titleWrapActionPosRight {
+    margin-right: 0;
+}
+
+.MuiGridListTileBar-title {
+    overflow: hidden;
+    font-size: 1rem;
+    line-height: 24px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.MuiGridListTileBar-subtitle {
+    overflow: hidden;
+    font-size: 0.75rem;
+    line-height: 1;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.MuiGridListTileBar-actionIconActionPosLeft {
+    order: -1;
+}
+
+.MuiSelect-root {
+    min-height: 1.185em;
+}
+
+.MuiSelect-select {
+    cursor: pointer;
+    min-width: 16px;
+    user-select: none;
+    border-radius: 0;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+
+.MuiSelect-select:focus {
+    border-radius: 0;
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.MuiSelect-select::-ms-expand {
+    display: none;
+}
+
+.MuiSelect-select.Mui-disabled {
+    cursor: default;
+}
+
+.MuiSelect-select[multiple] {
+    height: auto;
+}
+
+.MuiSelect-select:not([multiple]) option,
+.MuiSelect-select:not([multiple]) optgroup {
+    background-color: #fff;
+}
+
+.MuiSelect-select.MuiSelect-select {
+    padding-right: 24px;
+}
+
+.MuiSelect-filled.MuiSelect-filled {
+    padding-right: 32px;
+}
+
+.MuiSelect-outlined {
+    border-radius: 4px;
+}
+
+.MuiSelect-outlined.MuiSelect-outlined {
+    padding-right: 32px;
+}
+
+.MuiSelect-selectMenu {
+    height: auto;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.MuiSelect-icon {
+    top: calc(50% - 12px);
+    color: rgba(0, 0, 0, 0.54);
+    right: 0;
+    position: absolute;
+    pointer-events: none;
+}
+
+.MuiSelect-icon.Mui-disabled {
+    color: rgba(0, 0, 0, 0.26);
+}
+
+.MuiSelect-iconOpen {
+    transform: rotate(180deg);
+}
+
+.MuiSelect-iconFilled {
+    right: 7px;
+}
+
+.MuiSelect-iconOutlined {
+    right: 7px;
+}
+
+.MuiIconButton-root {
+    flex: 0 0 auto;
+    color: rgba(0, 0, 0, 0.54);
+    padding: 12px;
+    overflow: visible;
+    font-size: 1.5rem;
+    text-align: center;
+    transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    border-radius: 50%;
+    border: none;
+    background: none;
+}
+
+.MuiIconButton-root:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+}
+
+.MuiIconButton-root.Mui-disabled {
+    color: rgba(0, 0, 0, 0.26);
+    background-color: transparent;
+}
+
+@media (hover: none) {
+    .MuiIconButton-root:hover {
+        background-color: transparent;
+    }
+}
+
+.MuiIconButton-edgeStart {
+    margin-left: -12px;
+}
+
+.MuiIconButton-sizeSmall.MuiIconButton-edgeStart {
+    margin-left: -3px;
+}
+
+.MuiIconButton-edgeEnd {
+    margin-right: -12px;
+}
+
+.MuiIconButton-sizeSmall.MuiIconButton-edgeEnd {
+    margin-right: -3px;
+}
+
+.MuiIconButton-colorInherit {
+    color: inherit;
+}
+
+.MuiIconButton-colorPrimary {
+    color: #0054a6;
+}
+
+.MuiIconButton-colorPrimary:hover {
+    background-color: rgba(0, 84, 166, 0.04);
+}
+
+@media (hover: none) {
+    .MuiIconButton-colorPrimary:hover {
+        background-color: transparent;
+    }
+}
+
+.MuiIconButton-colorSecondary {
+    color: #ff6000;
+}
+
+.MuiIconButton-colorSecondary:hover {
+    background-color: rgba(255, 96, 0, 0.04);
+}
+
+@media (hover: none) {
+    .MuiIconButton-colorSecondary:hover {
+        background-color: transparent;
+    }
+}
+
+.MuiIconButton-sizeSmall {
+    padding: 3px;
+    font-size: 1.125rem;
+}
+
+.MuiIconButton-label {
+    width: 100%;
+    display: flex;
+    align-items: inherit;
+    justify-content: inherit;
+}
+
+
+.MuiSvgIcon-root {
+    fill: currentColor;
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    font-size: 1.5rem;
+    transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    flex-shrink: 0;
+    user-select: none;
+}
+
+.MuiSvgIcon-colorPrimary {
+    color: #0054a6;
+}
+
+.MuiSvgIcon-colorSecondary {
+    color: #ff6000;
+}
+
+.MuiSvgIcon-colorAction {
+    color: rgba(0, 0, 0, 0.54);
+}
+
+.MuiSvgIcon-colorError {
+    color: #f44336;
+}
+
+.MuiSvgIcon-colorDisabled {
+    color: rgba(0, 0, 0, 0.26);
+}
+
+.MuiSvgIcon-fontSizeInherit {
+    font-size: inherit;
+}
+
+.MuiSvgIcon-fontSizeSmall {
+    font-size: 1.25rem;
+}
+
+.MuiSvgIcon-fontSizeLarge {
+    font-size: 2.1875rem;
+}
+
+.MuiTouchRipple-root {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    overflow: hidden;
+    position: absolute;
+    border-radius: inherit;
+    pointer-events: none;
+}
+
+.MuiTouchRipple-ripple {
+    opacity: 0;
+    position: absolute;
+}
+
+.MuiTouchRipple-rippleVisible {
+    opacity: 0.3;
+    animation: MuiTouchRipple-keyframes-enter 550ms cubic-bezier(0.4, 0, 0.2, 1);
+    transform: scale(1);
+}
+
+.MuiTouchRipple-ripplePulsate {
+    animation-duration: 200ms;
+}
+
+.MuiTouchRipple-child {
+    width: 100%;
+    height: 100%;
+    display: block;
+    opacity: 1;
+    border-radius: 50%;
+    background-color: currentColor;
+}
+
+.MuiTouchRipple-childLeaving {
+    opacity: 0;
+    animation: MuiTouchRipple-keyframes-exit 550ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.MuiTouchRipple-childPulsate {
+    top: 0;
+    left: 0;
+    position: absolute;
+    animation: MuiTouchRipple-keyframes-pulsate 2500ms cubic-bezier(0.4, 0, 0.2, 1) 200ms infinite;
+}
+
+@-webkit-keyframes MuiTouchRipple-keyframes-enter {
+    0% {
+        opacity: 0.1;
+        transform: scale(0);
+    }
+
+    100% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+}
+
+@-webkit-keyframes MuiTouchRipple-keyframes-exit {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@-webkit-keyframes MuiTouchRipple-keyframes-pulsate {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(0.92);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+.MuiOutlinedInput-root {
+    position: relative;
+    border-radius: 4px;
+}
+
+.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+    border-color: rgba(0, 0, 0, 0.87);
+}
+
+@media (hover: none) {
+    .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+        border-color: rgba(0, 0, 0, 0.23);
+    }
+}
+
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: #0054a6;
+    border-width: 2px;
+}
+
+.MuiOutlinedInput-root.Mui-error .MuiOutlinedInput-notchedOutline {
+    border-color: #f44336;
+}
+
+.MuiOutlinedInput-root.Mui-disabled .MuiOutlinedInput-notchedOutline {
+    border-color: rgba(0, 0, 0, 0.26);
+}
+
+.MuiOutlinedInput-colorSecondary.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: #ff6000;
+}
+
+.MuiOutlinedInput-adornedStart {
+    padding-left: 14px;
+}
+
+.MuiOutlinedInput-adornedEnd {
+    padding-right: 14px;
+}
+
+.MuiOutlinedInput-multiline {
+    padding: 6px 5px;
+}
+
+.MuiOutlinedInput-multiline.MuiOutlinedInput-marginDense {
+    padding-top: 10.5px;
+    padding-bottom: 10.5px;
+}
+
+.MuiOutlinedInput-notchedOutline {
+    border-color: rgba(0, 0, 0, 0.23);
+}
+
+.MuiOutlinedInput-input {
+    padding: 6px 5px;
+}
+
+.MuiOutlinedInput-input:-webkit-autofill {
+    border-radius: inherit;
+}
+
+.MuiOutlinedInput-inputMarginDense {
+    padding-top: 10.5px;
+    padding-bottom: 10.5px;
+}
+
+.MuiOutlinedInput-inputMultiline {
+    padding: 0;
+}
+
+.MuiOutlinedInput-inputAdornedStart {
+    padding-left: 0;
+}
+
+.MuiOutlinedInput-inputAdornedEnd {
+    padding-right: 0;
+}
+
+.form-input {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.radio-button {
+    position: absolute;
+    right: -7px;
+    z-index: 1;
+}
+
+.li {
+    :hover {
+        cursor: pointer;
+    }
+}
+
+img:hover {
+    cursor: pointer;
+}

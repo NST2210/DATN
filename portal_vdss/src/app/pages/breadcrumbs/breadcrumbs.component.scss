@@ -1,0 +1,19 @@
+.underline-on-hover {
+  text-decoration: none;
+}
+
+.underline-on-hover:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+  float: left;
+  padding-right: var(--bs-breadcrumb-item-padding-x);
+  color: #0d6efd;
+  content: var(--bs-breadcrumb-divider, "/");
+}
+
+.breadcrumb {
+  float: left;
+}

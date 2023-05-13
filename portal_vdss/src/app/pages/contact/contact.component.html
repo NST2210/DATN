@@ -1,0 +1,123 @@
+<div class="contact">
+  <span class="contact-title">{{lang.parseTextCommon("contact_us")}}</span>
+  <!-- <div class="contact-form-wrapper"></div> -->
+</div>
+
+<div class="contact-content">
+  <div class="content col-md-12 row">
+    <div class="col-md-6 row">
+      <div class="col-2 css-img-icon">
+        <img class="img-icon" src="../../../assets/contact/vi_tri.png" />
+      </div>
+      <div class="col-9">
+        <div>
+          <span class="text-link"> {{lang.parseTextCommon("office")}} </span>
+        </div>
+        <div style="margin-top: -10px">
+          <span class="text-contact">
+            {{lang.parseTextCommon("address")}}
+          </span>
+        </div>
+      </div>
+
+      <div class="col-2 css-img-icon">
+        <img class="img-icon" src="../../../assets/contact/phone.png" />
+      </div>
+      <div class="col-9">
+        <div>
+          <span class="text-link"> {{lang.parseTextCommon("Hotline")}} </span>
+        </div>
+        <div style=" margin-top: -10px">
+          <span class="text-contact">{{lang.parseTextCommon("hotline")}}</span>
+        </div>
+      </div>
+
+      <div class="col-2 css-img-icon">
+        <img class="img-icon" src="../../../assets/contact/email.png" />
+      </div>
+      <div class="col-9">
+        <div>
+          <span class="text-link">{{lang.parseTextCommon("email")}}</span>
+        </div>
+        <div style=" margin-top: -10px">
+          <span class="text-contact">{{lang.parseTextCommon("emailAddress")}}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 row">
+      <form [formGroup]="feedbackForm" novalidate class="row-boder">
+        <div class="row ">
+          <div class="col-md-6 contact-form">
+            <input type="text" maxlength="100" trim="blur" class="form-control is-invalid" formControlName="name"
+              placeholder="{{lang.parseTextCommon('your_name')}}"
+              [ngClass]="{'is-invalid':isSubmitted && feedbackForm.controls['name'].errors}" 
+              [autofocus]="true"/>
+            <div class="invalid-feedback d-block-start" *ngIf="feedbackForm.controls['name'].errors?.['required']" >
+              {{lang.parseTextCommon("validate1")}}
+            </div>
+            <div class="invalid-feedback d-block-start" *ngIf="feedbackForm.controls['name'].errors?.['maxlength']">
+              {{lang.parseTextCommon("validate2")}}
+            </div>
+          </div>
+          <div class="col-md-6 contact-form">
+            <input type="text" class="form-control is-invalid" placeholder="{{lang.parseTextCommon('phone')}}"
+              formControlName="mobilePhone"
+              [ngClass]="{'is-invalid':isSubmitted && feedbackForm.controls['mobilePhone'].errors}" />
+            <div class="invalid-feedback d-block-start"
+              *ngIf="feedbackForm.controls['mobilePhone'].errors?.['required']">
+              {{lang.parseTextCommon("validate1")}}
+            </div>
+            <div class="invalid-feedback d-block-start"
+              *ngIf="feedbackForm.controls['mobilePhone'].errors?.['maxlength']">
+              {{lang.parseTextCommon("validate4")}}
+            </div>
+            <div class="invalid-feedback d-block-start"
+              *ngIf="feedbackForm.controls['mobilePhone'].errors?.['pattern']">
+              {{lang.parseTextCommon("validate3")}}
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 contact-form">
+          <input placeholder="{{lang.parseTextCommon('email')}}" type="text" maxlength="100"
+            class="form-control is-invalid" formControlName="email"
+            [ngClass]="{'is-invalid':isSubmitted && feedbackForm.controls['email'].errors}" />
+          <div class="invalid-feedback d-block-start" *ngIf="feedbackForm.controls['email'].errors?.['required']">
+            {{lang.parseTextCommon("validate1")}}
+          </div>
+          <div class="invalid-feedback d-block-start" *ngIf="feedbackForm.controls['email'].errors?.['pattern']">
+            {{lang.parseTextCommon("validate5")}}
+          </div>
+          <div class="invalid-feedback d-block-start" *ngIf="feedbackForm.controls['email'].errors?.['maxlength']">
+            {{lang.parseTextCommon("validate2")}}
+          </div>
+        </div>
+        <div class="col-md-12 contact-form">
+          <textarea trim="blur" matInput rows="6" cols="20" placeholder="{{lang.parseTextCommon('content')}}"
+            [maxlength]="1000" class="form-control is-invalid" formControlName="content" trimOnBlur
+            (ngModelChange)="feedbackChange($event)"
+            [ngClass]="{'is-invalid': isSubmitted && feedbackForm.controls['content'].errors}">
+          </textarea>
+          <div class="invalid-feedback d-block-start" *ngIf="feedbackForm.controls['content'].errors?.['required']">
+            {{lang.parseTextCommon("validate1")}}
+          </div>
+          <div class="invalid-feedback d-block-start" *ngIf="feedbackForm.controls['content'].errors?.['maxlength']">
+            {{lang.parseTextCommon("validate6")}}
+          </div>
+        </div>
+        <div class="form-group clear-margin" style="margin: 1%">
+          <button type="button" class="btn btn-send" (click)="doFeedback()">
+            <i class="fas fa-light fa-paper-plane">&nbsp;</i>{{lang.parseTextCommon("send")}}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="contact-content">
+  <iframe class="google-map"
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d931.0171670186861!2d105.7845388292129!3d21.0299382509028!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135aba73037d31b%3A0x3020b8f302a3b361!2sVDSS!5e0!3m2!1svi!2sus!4v1680855330059!5m2!1svi!2sus"
+    width="600" height="450" style="border: 0" allowfullscreen="" loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"></iframe>
+</div>

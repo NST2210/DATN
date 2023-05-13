@@ -1,0 +1,91 @@
+<app-loading [loading]="loading"></app-loading>
+<div class="modal-header">
+    <h4 class="modal-title pull-left" [innerHTML]="title"></h4>
+</div>
+<div class="modal-body">
+    <mat-card style="border: #ccc 1px solid; box-shadow: none !important">
+        <mat-card-content>
+            <form [formGroup]="form" novalidate>
+                <c-row>
+                    <c-col md="4" xl="4" xs="12">
+                        <mat-form-field class="full-width">
+                            <mat-label>Mã menu</mat-label>
+                            <input trim="blur" type="text" uppercaseText matInput formControlName="code"/>
+                            <mat-error *ngIf="form.controls['code'].hasError('maxlength')">
+                                Mã menu không được dài quá 30 kí tự
+                            </mat-error>
+                            <mat-error *ngIf="form.controls['code'].hasError('required')">
+                                Vui lòng nhập thông tin
+                            </mat-error>
+                        </mat-form-field>
+                    </c-col>
+                    <c-col md="4" xl="4" xs="12">
+                        <mat-form-field class="full-width">
+                            <mat-label>Tên menu</mat-label>
+                            <input matInput formControlName="name"/>
+                            <mat-error *ngIf="form.controls['name'].hasError('required')">
+                                Vui lòng nhập thông tin
+                            </mat-error>
+                            <mat-error *ngIf="form.controls['name'].hasError('maxlength')">
+                                Tên menu không được dài quá 70 kí tự
+                            </mat-error>
+                        </mat-form-field>
+                    </c-col>
+                    <c-col md="4" xl="4" xs="12">
+                        <mat-form-field class="full-width">
+                            <mat-label>Menu cha</mat-label>
+                            <mat-select class="full-width" formControlName="parentId"
+                                        (selectionChange)="onChangeMenuParent($event)">
+                                <mat-option [value]=-1>
+                                    ---Chọn menu cha---
+                                </mat-option>
+                                <mat-option *ngFor="let obj of listMenuParent" [value]="obj.id">
+                                    {{ obj.name }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </c-col>
+                </c-row>
+                <c-row>
+                    <c-col md="4" xl="4" xs="12">
+                        <mat-form-field class="full-width">
+                            <mat-label>Đường dẫn URL</mat-label>
+                            <input matInput formControlName="path"/>
+                            <mat-error *ngIf="form.controls['path'].hasError('required')">
+                                Vui lòng nhập thông tin
+                            </mat-error>
+                            <mat-error *ngIf="form.controls['path'].hasError('maxlength')">
+                                Đường dẫn không được dài quá 255 kí tự
+                            </mat-error>
+                        </mat-form-field>
+                    </c-col>
+                    <c-col md="4" xl="4" xs="12">
+                        <mat-form-field class="full-width">
+                            <mat-label>Icon</mat-label>
+                            <input matInput formControlName="icon">
+                            <mat-icon  matSuffix (click)="doChoiceIcon()"
+                                      *ngIf="formType !== 'detail'"><i class="fa fa-eye" aria-hidden="true"></i>
+                            </mat-icon>
+                        </mat-form-field>
+                    </c-col>
+                    <c-col md="4" xl="4" xs="12">
+                        <mat-form-field class="full-width">
+                            <mat-label>Thứ tự hiển thị</mat-label>
+                            <input matInput formControlName="displayOrder"/>
+                        </mat-form-field>
+                    </c-col>
+                </c-row>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>
+<div class="modal-footer">
+    <button class="margin-r15" color="info" cButton (click)="saveMenuGroup()" *ngIf="formType!=='detail'">
+        <svg cIcon name="cilSave"></svg>
+        Lưu
+    </button>
+    <button color="danger" cButton (click)="doClose()">
+        <svg cIcon name="cilX"></svg>
+        Đóng
+    </button>
+</div>

@@ -1,0 +1,112 @@
+$app-color-primary: #2d67b2;
+$app-color-warning: #ed1d24;
+
+.main-loading {
+    position: fixed;
+    z-index: 999;
+    height: 2em;
+    width: 2em;
+    overflow: visible;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+/* Transparent Overlay */
+.main-loading:before {
+    content: '';
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #e0ebeb;
+    opacity: 0.4;
+}
+
+/* :not(:required) hides these rules from IE9 and below */
+.main-loading:not(:required) {
+    /* hide "loading..." text */
+    font: 0/0 a;
+    color: transparent;
+    text-shadow: none;
+    background-color: transparent;
+    border: 0;
+}
+
+
+.loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 40px;
+    width: 40px;
+    transform: translate(-50%, -50%) rotate(45deg) translate3d(0, 0, 0);
+    animation: animate 1.2s ease-in-out infinite;
+}
+
+@keyframes animate {
+
+    0%,
+    10%,
+    100% {
+        height: 40px;
+        width: 40px;
+    }
+
+    65% {
+        height: 70px;
+        width: 70px;
+    }
+}
+
+span {
+    position: absolute;
+    display: block;
+    width: 20px;
+    height: 20px;
+    animation: rotate 1.2s linear both infinite;
+}
+
+@keyframes rotate {
+
+    0%,
+    30% {
+        transform: rotate(0);
+    }
+
+    65% {
+        transform: rotate(-40deg);
+    }
+
+    100% {
+        transform: rotate(-90deg);
+    }
+}
+
+span:nth-child(1) {
+    top: 0;
+    left: 0;
+    background: $app-color-primary;
+}
+
+span:nth-child(2) {
+    top: 0;
+    right: 0;
+    background: $app-color-warning;
+}
+
+span:nth-child(3) {
+    bottom: 0;
+    left: 0;
+    background: $app-color-warning;
+}
+
+span:nth-child(4) {
+    bottom: 0;
+    right: 0;
+    background: $app-color-primary;
+}

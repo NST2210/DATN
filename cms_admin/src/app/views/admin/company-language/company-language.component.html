@@ -1,0 +1,52 @@
+<app-loading [loading]="loading"></app-loading>
+<div class="animated fadeIn">
+    <mat-card>
+        <mat-card-header class="card-header-custom">
+            <mat-card-title>Thông tin tìm kiếm</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <c-row>
+                <c-col md="4" xl="4" xs="12">
+                    <mat-form-field class="full-width">
+                        <mat-label>Mã Công Ty</mat-label>
+                        <input trim="blur" matInput [(ngModel)]="companyCode" [value]="companyCode" [disabled]="true">
+                    </mat-form-field>
+                </c-col>
+                <c-col md="4" xl="4" xs="12">
+                    <mat-form-field class="full-width">
+                        <mat-label>Ngôn Ngữ</mat-label>
+                        <mat-select [(ngModel)]="langCode">
+                            <mat-option *ngFor="let obj of listCompany" [value]="obj.langCode">
+                                {{obj.langName}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </c-col>
+                <c-col md="4" xl="4" xs="12">
+                    <mat-form-field class="full-width">
+                        <mat-label>Ngày Tạo Từ</mat-label>
+                        <input matInput [(ngModel)]="createDate" placeholder="dd/MM/yyyy">
+                    </mat-form-field>
+                </c-col>
+            </c-row>
+
+            <div class="form-group text-end clear-margin">
+                <button active="normal" color="info" cButton (click)="doSearch(0)">
+                    <svg cIcon name="cilZoom"></svg>
+                    Tìm kiếm
+                </button>
+                <button active="normal" class="margin-l5" color="info" cButton (click)="addNew()">
+                    <svg cIcon name="cilPlus"></svg>
+                    Thêm mới
+                </button>
+            </div>
+
+        </mat-card-content>
+    </mat-card>
+    <grid-table
+        [dataSource]="dataList"
+        [tableColumns]="tableColumns"
+        [tableAction]="tableAction"
+        [totalItems]="totalItems">
+    </grid-table>
+</div>

@@ -1,0 +1,54 @@
+<app-loading [loading]="loading"></app-loading>
+<div class="modal-header">
+    <h4 class="modal-title pull-left" [innerHTML]="title"></h4>
+</div>
+<div class="modal-body">
+    <form [formGroup]="form" novalidate>
+        <c-row>
+            <c-col md="4" xl="4" xs="12">
+                <mat-form-field class="full-width">
+                    <mat-label>Tên đăng nhập</mat-label>
+                    <input matInput formControlName="userName">
+                    <mat-error *ngIf="form.controls['userName'].hasError('maxlength')"> Tên đăng nhập không được dài quá
+                        70 kí tự
+                    </mat-error>
+                    <mat-error *ngIf="form.controls['userName'].hasError('required')"> Vui lòng nhập thông tin
+                    </mat-error>
+                    <mat-error *ngIf="form.controls['userName'].hasError('pattern')">Tên đăng nhập không hợp lệ
+                    </mat-error>
+                </mat-form-field>
+            </c-col>
+            <c-col md="4" xl="4" xs="12">
+                <mat-form-field class="full-width">
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="email">
+                    <mat-error *ngIf="form.controls['email'].hasError('maxlength')"> Email không được dài quá 40 kí tự
+                    </mat-error>
+                    <mat-error *ngIf="form.controls['email'].hasError('required')"> Vui lòng nhập thông tin</mat-error>
+                    <mat-error *ngIf="form.controls['email'].hasError('pattern')">Email không hợp lệ</mat-error>
+                </mat-form-field>
+            </c-col>
+            <c-col md="4" xl="4" xs="12">
+                <mat-form-field class="full-width">
+                    <mat-label>Quyền người dùng</mat-label>
+                    <mat-select class="full-width" formControlName="roleCode">
+                        <mat-option [value]=undefined>{{ '---Lựa chọn---' }}</mat-option>
+                        <mat-option *ngFor="let item of lstRole" [value]="item.code">{{ item.name }}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="form.controls['roleCode'].hasError('required')"> Vui lòng nhập thông tin
+                    </mat-error>
+                </mat-form-field>
+            </c-col>
+        </c-row>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="margin-r15" color="info" cButton *ngIf="formType !== 'detail'" (click)="doSave()">
+        <svg cIcon name="cilSave"></svg>
+        Lưu
+    </button>
+    <button color="danger" cButton (click)="doClose()">
+        <svg cIcon name="cilX"></svg>
+        Đóng
+    </button>
+</div>

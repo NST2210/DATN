@@ -1,0 +1,109 @@
+<div class="solution-detail" *ngIf="articleDetail">
+  <div class="solution-detail-title">
+
+    <!-- breadcrumbs -->
+    <strong class="text-left">
+      <div class="breadcrumb-title">
+        <app-breadcrumbs groupName={{articleDetail.groupName}} menuCode={{articleDetail.menuCode}}
+          solutionName={{articleDetail.title}} articleDetailId={{articleDetailId}}></app-breadcrumbs>
+      </div>
+    </strong>
+
+    <!-- Tên bài viết -->
+    <span class="solution-detail-title-lb mb-5">{{ articleDetail.title }}</span>
+
+    <!-- Mô tả tóm tắt bài viết -->
+    <span class="solution-sumary-content-cate mb-40">{{ articleDetail.describe }}</span>
+  </div>
+
+  <div class="solution-sumary-content">
+
+    <!-- Ảnh bài viết -->
+    <div class="solution-detail-img mb-20">
+      <img src="{{ 'data:image/jpg;base64,' + articleDetail.articleImg }}" alt="">
+    </div>
+
+    <!-- Nội dung bài viết -->
+    <div class="solution-detail-other mb-42" [innerHTML]="contentReplace">
+    </div>
+  </div>
+</div>
+
+<!-- Form liên hệ -->
+<div class="contact">
+  <span class="contact-title">{{lang.parseTextCommon("contact_us")}}</span>
+  <form [formGroup]="feedbackForm" novalidate>
+    <div class="contact-form-wrapper">
+      <div class="contact-form">
+        <div class="row mb-20">
+          <div class="col-md-4">
+            <input type="text" maxlength="100" trim="blur" class="form-control is-invalid" formControlName="name"
+              placeholder="{{lang.parseTextCommon('your_name')}}" [ngClass]="{'is-invalid':
+                            isSubmitted && feedbackForm.controls['name'].errors}" />
+            <div class="invalid-feedback d-block-start" *ngIf="feedbackForm.controls['name'].errors?.['required']">
+              {{lang.parseTextCommon("validate1")}}
+            </div>
+            <div class="invalid-feedback d-block-start" *ngIf="feedbackForm.controls['name'].errors?.['maxlength']">
+              {{lang.parseTextCommon("validate2")}}
+            </div>
+            <div class="invalid-feedback d-block-start" *ngIf="feedbackForm.controls['name'].errors?.['pattern']">
+              {{lang.parseTextCommon("validate7")}}
+            </div>
+            <br>
+          </div>
+          <div class="col-md-4">
+            <input type="text" class="form-control is-invalid" placeholder="{{lang.parseTextCommon('phone')}}"
+              formControlName="mobilePhone" [ngClass]="{'is-invalid':
+                            isSubmitted && feedbackForm.controls['mobilePhone'].errors}" />
+            <div class="invalid-feedback d-block-start"
+              *ngIf="feedbackForm.controls['mobilePhone'].errors?.['required']">
+              {{lang.parseTextCommon("validate1")}}
+            </div>
+            <div class="invalid-feedback d-block-start"
+              *ngIf="feedbackForm.controls['mobilePhone'].errors?.['maxlength']">
+              {{lang.parseTextCommon("validate4")}}
+            </div>
+            <div class="invalid-feedback d-block-start"
+              *ngIf="feedbackForm.controls['mobilePhone'].errors?.['pattern']">
+              {{lang.parseTextCommon("validate3")}}
+            </div>
+            <br>
+          </div>
+          <div class="col-md-4">
+            <input placeholder="{{lang.parseTextCommon('email')}}" type="text" maxlength="100"
+              class="form-control is-invalid" formControlName="email" [ngClass]="{'is-invalid':
+                            isSubmitted && feedbackForm.controls['email'].errors}" />
+            <div class="invalid-feedback d-block-start" *ngIf="feedbackForm.controls['email'].errors?.['required']">
+              {{lang.parseTextCommon("validate1")}}
+            </div>
+            <div class="invalid-feedback d-block-start" *ngIf="feedbackForm.controls['email'].errors?.['pattern']">
+              {{lang.parseTextCommon("validate5")}}
+            </div>
+            <div class="invalid-feedback d-block-start" *ngIf="feedbackForm.controls['email'].errors?.['maxlength']">
+              {{lang.parseTextCommon("validate2")}}
+            </div>
+          </div>
+        </div>
+        <div class="row mb-20">
+          <div class="col-md-12">
+            <textarea rows="6" cols="20" trim="blur" matInput placeholder="{{lang.parseTextCommon('content')}}"
+              [maxlength]="1000" class="form-control is-invalid" formControlName="content"
+              (ngModelChange)="feedbackChange($event)" [ngClass]="{
+              'is-invalid': isSubmitted && feedbackForm.controls['content'].errors
+            }"></textarea>
+            <div class="invalid-feedback d-block-start" *ngIf="feedbackForm.controls['content'].errors?.['required']">
+              {{lang.parseTextCommon("validate1")}}
+            </div>
+            <div class="invalid-feedback d-block-start" *ngIf="feedbackForm.controls['content'].errors?.['maxlength']">
+              {{lang.parseTextCommon("validate6")}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group text-center clear-margin">
+          <button type="button" class="btn btn-primary btn-sent" (click)="doFeedback()"><i
+              class="fas fa-light fa-paper-plane">&nbsp;</i>{{lang.parseTextCommon("send")}}</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

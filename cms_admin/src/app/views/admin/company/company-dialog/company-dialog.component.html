@@ -1,0 +1,48 @@
+<app-loading [loading]="loading"></app-loading>
+<div class="modal-header">
+    <h4 class="modal-title pull-left" [innerHTML]="title"></h4>
+</div>
+<div class="modal-body">
+    <form [formGroup]="userForm">
+        <c-row>
+            <c-col md="6" xl="6" xs="12">
+                <mat-form-field class="full-width">
+                    <mat-label>Mã công ty</mat-label>
+                    <input trim="blur" matInput formControlName="code">
+                    <mat-error>
+                        Vui lòng nhập thông tin
+                    </mat-error>
+                </mat-form-field>
+            </c-col>
+            <c-col md="6" xl="6" xs="12">
+                <mat-form-field class="full-width">
+                    <mat-label>Trạng thái </mat-label>
+                    <mat-select formControlName="isActive">
+                        <mat-option [value]="">
+                            --- Chọn ---
+                        </mat-option>
+                        <mat-option [value]="1">
+                            Đang hoạt động
+                        </mat-option>
+                        <mat-option [value]="0">
+                            Ngừng hoạt động
+                        </mat-option>
+                    </mat-select>
+                    <mat-error>
+                        Vui lòng nhập thông tin
+                    </mat-error>
+                </mat-form-field>
+            </c-col>
+        </c-row>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="margin-r15" color="info" cButton (click)="doSave()">
+        <svg cIcon name="cilSave"></svg>
+        Lưu
+    </button>
+    <button color="danger" cButton (click)="close()">
+        <svg cIcon name="cilX"></svg>
+        Đóng
+    </button>
+</div>

@@ -1,0 +1,213 @@
+$spacing-body: 10%;
+
+
+.solution-detail {
+  float: left;
+  width: 100%;
+  align-items: center;
+  // padding: 35px 0px;
+
+  .solution-detail-title {
+    float: left;
+    width: 100%;
+    padding: 70px $spacing-body 5px $spacing-body;
+    position: relative;
+    background-size: cover;
+    will-change: transform;
+    //height: 200px;
+
+    .solution-detail-title-lb {
+      font-weight: 700;
+      font-size: 44px;
+      line-height: 56px;
+    }
+
+    .breadcrumb-title {
+      font-size: 18px;
+      font-weight: 400;
+      letter-spacing: normal;
+      height: 36px;
+      margin-top: 25px;
+    }
+
+    .solution-sumary-content-cate {
+      float: left;
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 36px;
+    }
+
+  }
+
+  .solution-detail-img {
+    text-align: center;
+
+    // border-radius: 8px;
+    img {
+      width: 920px;
+      height: auto;
+      object-fit: cover;
+    }
+  }
+
+  .solution-detail-other {
+    width: 100%;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 24px;
+    float: left;
+    padding: 10px $spacing-body;
+    font-size: 18px;
+    line-height: 36px;
+    text-align: justify;
+
+    img {
+      width: 575px;
+      height: 377px;
+    }
+  }
+
+
+  .solution-detail-other-title-lb {
+    float: left;
+    width: 100%;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 32px;
+  }
+}
+
+//============================// Liên hệ
+
+.contact {
+  float: left;
+  width: 100%;
+  align-items: center;
+  background: url(../../../../assets/contact/bg_contact.png) center center no-repeat;
+  background-size: cover;
+  will-change: transform;
+  padding: 30px;
+  margin-top: 30px;
+
+  .contact-title {
+    float: left;
+    width: 100%;
+    font-size: 44px;
+    color: #fff;
+    margin-bottom: 30px;
+    margin-top: 40px;
+    text-align: center;
+  }
+
+  .contact-form-wrapper {
+    float: left;
+    width: 100%;
+    margin-bottom: 70px;
+
+    .contact-form {
+      width: 60%;
+      margin: 0px auto;
+      background-color: #dbe5f1;
+      padding: 30px;
+      border-radius: 12px;
+    }
+
+    .btn-sent {
+      background: #2e67b2;
+    }
+
+    .btn-sent:hover {
+      background: #004d99;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  $spacing-body: 4% !important;
+
+  .solution-detail {
+    width: 100%;
+
+    .solution-detail-title {
+      float: left;
+      width: 100%;
+      padding: 0px $spacing-body;
+      margin-top: 70px;
+      position: relative;
+      background-size: cover;
+      will-change: transform;
+
+      .breadcrumb-title {
+        font-size: 18px !important;
+      }
+    }
+
+    .solution-detail-title-lb {
+      width: 100%;
+      font-weight: 700;
+      font-size: 19px !important;
+      line-height: 28px !important;
+    }
+
+    .solution-sumary-content-cate {
+      font-size: 19px !important;
+      line-height: 28px !important;
+    }
+
+
+  }
+
+  .contact {
+    float: left;
+    width: 100%;
+
+    .contact-title {
+      line-height: 50px;
+    }
+
+    .contact-form {
+      width: 100% !important;
+      margin: 0px auto;
+      background-color: #dbe5f1;
+      padding: 25px 10px !important;
+    }
+
+  }
+
+  .solution-detail-img {
+    text-align: center;
+
+    // border-radius: 8px;
+    img {
+      width: 95% !important;
+      height: auto;
+      object-fit: cover;
+    }
+  }
+
+  .solution-detail-other {
+    width: 100%;
+    padding: 0% $spacing-body;
+    font-size: 18px;
+    line-height: 36px;
+    text-align: justify;
+
+    img {
+      width: 575px;
+      height: 377px;
+    }
+  }
+
+  .mb-48 {
+    margin-bottom: 5px !important;
+  }
+
+  .mb-24 {
+    margin-bottom: 5px !important;
+  }
+
+  .mb-40 {
+    margin-bottom: 5px !important;
+  }
+
+}

@@ -1,0 +1,43 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left" [innerHTML]="title"></h4>
+</div>
+<div class="modal-body">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- <span class="flow-step-info">Thông tin phê duyệt</span> -->
+                <article-step [articleDetailLangId]="articleDetailId"></article-step>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="main-timeline">
+                    <div
+                        class="tileline"
+                        *ngFor="let item of dataList; let i = index"
+                    >
+                        <span class="icon fa fa-globe"></span>
+                        <a class="timeline-content">
+                            <h3 class="title">
+                                {{ item.userName }} ({{
+                                    item.createDate
+                                        | date : "dd/MM/yyyy HH:mm:ss"
+                                }})
+                            </h3>
+                            <p
+                                class="description"
+                                [innerHTML]="item.content"
+                            ></p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button color="danger" cButton (click)="doClose()">
+        <svg cIcon name="cilX"></svg>
+        Đóng
+    </button>
+</div>

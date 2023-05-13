@@ -1,0 +1,28 @@
+<div class="solution-sumary" >
+  <div class="solution-sumary-title" >
+    <span class="solution-sumary-title-lb">{{groupName}}</span>
+  </div>
+  <div class="solution-sumary-content">
+    <div class="row mb-24" *ngFor="let item of listAllSolution">
+      <div class="col-3 solution-sumary-items" (click)="doViewDetailSolution(item)">
+        <img src="{{ 'data:image/jpg;base64,' + item.imgDisplay }}" alt="">
+      </div>
+      <div class="col-9 solution-sumary-col" (click)="doViewDetailSolution(item)" routerLinkActive="active-link">
+        <span class="solution-sumary-contend-title" [innerHTML]="item.title"></span><br>
+        <span class="solution-sumary-content-cate" [innerHTML]="item.describe"></span><br>
+        <div class="form-group text-left clear-margin">
+          <a class="btn btn-view-solution-sumary" role="button"
+            (click)="doViewDetailSolution(item)">{{lang.parseTextCommon("see_details")}}&nbsp;&nbsp;<i
+              class="fa-solid fa-arrow-right-long"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <mat-paginator #paginator class="demo-paginator" (page)="handlePageEvent($event)" [length]="length"
+        [pageSize]="pageSize" [disabled]="false" [showFirstLastButtons]="true" [hidePageSize]="true"
+        [pageIndex]="pageIndex" aria-label="Select page">
+      </mat-paginator>
+    </div>
+  </div>
+</div>
+

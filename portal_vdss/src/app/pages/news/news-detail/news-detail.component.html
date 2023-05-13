@@ -1,0 +1,72 @@
+<div class="news-detail" *ngIf="articleDetail">
+  <div class="news-detail-title">
+    <strong class="news-detail-title-lb text-left">
+      <div class="breadcrumb-title">
+        <app-breadcrumbs></app-breadcrumbs> 
+      </div>
+      <!-- Tên bài viết -->
+      <span class="news-detail-title-lb">{{ articleDetail.title }}</span>
+    </strong>
+  </div>
+
+  <!-- Thời gian tạo bài -->
+  <div class="news-detail-time mb-24">
+    <strong class="news-detail-time-lb">{{dateTimeUtils.displayDetailDate(articleDetail.createDate)}}, {{
+      articleDetail.createDate | date:'dd/MM/yyyy'}}</strong>
+  </div>
+
+  <!-- Ảnh bài viết -->
+  <!-- <div class="news-detail-img text-center mb-24">
+    <img src="{{ 'data:image/jpg;base64,' + articleDetail.articleImg }}" alt="">
+  </div> -->
+
+  <!-- Nội dung bài viết -->
+  <div class="news-detail-content">
+
+    <!-- Mô tả tóm tắt bài viết -->
+    <!-- <div class="news-detail-describe mb-20">
+      {{ articleDetail.describe}}
+    </div> -->
+
+    <span class="news-detail-content-lb" [innerHTML]="contentReplace">
+    </span>
+
+   <!-- Tác giả bài viết -->
+    <div class="authors-infos">
+      <span class="authors-infos" style="text-align: right;">{{
+        articleDetail.authInfo
+        }}</span>
+      <span class="authors-infos" style="text-align: right; float: right; font-weight: bold;">{{
+        articleDetail.authName
+        }}</span>
+    </div>
+
+    <!-- Link chia sẻ -->
+    <div class="row mb-48">
+      <div class="new-detail-icon">
+        <div class="cl-padding-lr new-detail-share">{{lang.parseTextCommon("share")}}:</div>
+        <div class="">
+          <ul class="new-detail-share-icon">
+            <li (click)="shareLink(0)"><i class="fa-brands fa-facebook"
+                style="color: linear-gradient(180deg, #18ACFE 0%, #0163E0 99.7%);"></i></li>
+            <li (click)="shareLink(1)"><i class="fa-brands fa-twitter" style="color: #47ACDF;"></i></li>
+            <li (click)="shareLink(2)"><i class="fa-brands fa-linkedin" style="color: rgba(18, 117, 177, 1);"></i></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tin liên quan -->
+  <div class="wrap-title">
+    <span>{{lang.parseTextCommon("related_news")}}</span>
+  </div>
+
+  <!-- Các bài liên quan -->
+  <div class="content col-md-12 row c-p others-news-group">
+    <div class="col-md-4 padding-all others-news" *ngFor="let item of listOthersNews" (click)="doViewDetailNew(item)">
+      <img class="img-big-new" *ngIf="item.imgDisplay" src="{{ 'data:image/jpg;base64,' + item.imgDisplay  }}" />
+      <img class="img-big-new c-p" *ngIf="!item.imgDisplay" src="../../../assets/home/logo.png" />
+      <a style="text-decoration: none;"><span class="text-small">{{item.title}}</span></a>
+    </div>
+  </div>

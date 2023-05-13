@@ -1,0 +1,64 @@
+<div class="news">
+  <span class="news-title">{{lang.parseTextCommon("event_news")}}</span>
+</div>
+
+<div class="news-content">
+  <div class="content col-md-12 row" style="margin-bottom: -30px;">
+    <div class="col-md-8 padding-all" *ngIf="articleOnlyHome">
+      <img class="img-big c-p" *ngIf="articleOnlyHome.imgDisplay"
+        src="{{ 'data:image/jpg;base64,' + articleOnlyHome.imgDisplay }}" (click)="doViewDetailNew(articleOnlyHome)" />
+      <img class="img-big c-p" *ngIf="!articleOnlyHome.imgDisplay" src="../../../assets/home/logo.png"
+        (click)="doViewDetailNew(articleOnlyHome)" />
+      <a style="text-decoration: none;">
+        <span class="text-big c-p" (click)="doViewDetailNew(articleOnlyHome)" data-toggle="tooltip"
+          title="{{articleOnlyHome.title}}">{{
+          helper.subText(articleOnlyHome.title, 75)
+          }}</span>
+      </a>
+      <span class="text-small-describe">{{articleOnlyHome.describe? helper.subText(articleOnlyHome.describe, 200) : ""}}</span>
+    </div>
+
+    <div class="col-md-4 padding-all ">
+      <div *ngFor="let item of artFirstRight">
+        <img class="img-small c-p" *ngIf="item.imgDisplay" src="{{ 'data:image/jpg;base64,' + item.imgDisplay }}"
+          (click)="doViewDetailNew(item)" />
+        <img class="img-small c-p" *ngIf="!item.imgDisplay" src="../../../assets/home/logo.png"
+          (click)="doViewDetailNew(item)" />
+        <span class="text-small c-p" (click)="doViewDetailNew(item)" data-toggle="tooltip" title="{{item.title}}">{{
+          helper.subText(item.title, 44)
+          }}</span>
+
+        <span class="text-small-describe">{{item.describe? helper.subText(item.describe, 80) : ""}}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="content col-md-12 row">
+    <div class="col-md-4 padding-all  " *ngFor="let item of listAllNews">
+      <img class="img-big-new c-p" *ngIf="item.imgDisplay" src="{{ 'data:image/jpg;base64,' + item.imgDisplay }}"
+        (click)="doViewDetailNew(item)" />
+      <img class="img-big-new c-p" *ngIf="!item.imgDisplay" src="../../../assets/introduce/co_vua.png"
+        (click)="doViewDetailNew(item)" />
+      <a>
+        <span class="text-small c-p" (click)="doViewDetailNew(item)" data-toggle="tooltip" title="{{item.title}}">
+          {{item.title? helper.subText(item.title, 50) : ""}}
+        </span>
+
+        <span class="news-detail-time">
+          {{ item.createDate | date:'dd/MM/yyyy'}}
+        </span>
+
+        <span class="text-small-describe">
+          {{item.describe? helper.subText(item.describe, 80) : ""}}
+        </span>
+      </a>
+
+    </div>
+  </div>
+
+  <div class="row paging">
+    <mat-paginator #paginator class="demo-paginator" (page)="handlePageEvent($event)" [length]="length"
+      [pageSize]="pageSize" [disabled]="false" [showFirstLastButtons]="true" [hidePageSize]="true"
+      [pageIndex]="pageIndex" aria-label="Select page">
+    </mat-paginator>
+  </div>
